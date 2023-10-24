@@ -1378,7 +1378,7 @@
 
 
 
-//固定次数用for
+//固定次数用for，起点和终点的值都是明确的，用for最合适
 //先执行一次用do while
 //其他情况用while
 
@@ -1578,30 +1578,845 @@
 
 //如何用1角，2角和5角的硬币凑出10元以下的金额	goto out
 
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int x = 0;
+//
+//	scanf("%d", &x);
+//
+//	int one, two, five;
+//
+//	int exit = 0;
+//
+//	for (one = 1; one < x * 10; one++) {
+//		for (two = 1; two < x * 10 / 2; two++) {
+//			for (five = 1; five < x * 10 / 5; five++) {
+//				if (one + two * 2 + five * 5 == x * 10) {
+//					printf("可以用%d个1角加%d个两角加%d个5角得到%d元\n\n", one, two, five, x);
+//					exit = 1;
+//					goto out;
+//				}
+//			}
+//		}
+//	}
+//out:
+//	return 0;
+//
+//}
+
+
+
+
+//前n项和  等差数列
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int n = 0;
+//
+//	int i = 1;
+//
+//	double sum = 0;
+//	
+//	scanf("%d", &n);
+//
+//	for (i = 1; i < n; i++) {
+//		sum += 1.0 / i;
+//	
+//	}
+//
+//	printf("f%d=%f", n, sum);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//求前n项和，加一个减一个，等差数列
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int n = 0;
+//
+//	int i = 1;
+//
+//	double sum = 0.0;
+//
+//	scanf("%d", &n);
+//
+//	double sign = 1;
+//
+//	for (i = 1; i <=n; i++) {
+//			
+//		sum += sign/i;
+//		sign = -sign;
+//	}
+//
+//	printf("%f", sum);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//整数分解		wk’45
+
 #include <stdio.h>
 
-int main() {
+//int main() {
+//
+//	int x;
+//	scanf("%d", &x);
+//
+//	int mask = 1;
+//
+//	int t = x;
+//	
+//	while (t > 9) {
+//		t /= 10;
+//		mask *= 10;
+//	}
+//
+//	printf("x=%d,mask=%d\n", x, mask);
+//	do {
+//		int d = x / mask;
+//		printf("%d", d);
+//		if (mask > 9) {
+//			printf(" ");
+//		}
+//
+//		x %= mask;
+//		mask /= 10;
+//	} while (mask > 0);
+//
+//	printf("\n");
+//
+//	return 0;
+//}
 
-	int x = 0;
 
-	scanf("%d", &x);
 
-	int one, two, five;
 
-	int exit = 0;
 
-	for (one = 1; one < x * 10; one++) {
-		for (two = 1; two < x * 10 / 2; two++) {
-			for (five = 1; five < x * 10 / 5; five++) {
-				if (one + two * 2 + five * 5 == x * 10) {
-					printf("可以用%d个1角加%d个两角加%d个5角得到%d元\n\n", one, two, five, x);
-					exit = 1;
-					goto out;
-				}
-			}
-		}
-	}
-out:
-	return 0;
+//求最大公约数
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int a = 0;
+//
+//	int b = 0;
+//
+//	scanf("%d", &a);
+//
+//	scanf("%d", &b);
+//
+//	int t = 0;
+//
+//	while (b > 0) {
+//		t = a % b;
+//		a = b;
+//		b = t;
+//	}
+//
+//	printf("最大公约数是%d\n", a);
+//
+//	return 0;
+//}
 
-}
+
+
+
+
+//输入一个小于6的整数A，考虑从A开始的连续4个数字。请输入所有由它们组成的无重复数字的3位数 eg:A=1  1,2,3,4  输出123,124,234,231..
+
+//#include <stdio.h>
+//
+//int main() {
+//		
+//	int a = 0;
+//
+//	scanf("%d", &a);
+//
+//	int i, j, k;
+//	int cnt = 0;
+//
+//	i = a;
+//	while (i <= a + 3) {
+//		j = a;
+//		while (j <= a + 3) {
+//			k = a;
+//			while (k < a + 3) {
+//				if (i != j) {
+//					if (i != k) {
+//						if (j != k) {
+//							cnt++;
+//							printf("%d%d%d", i, j, k);
+//							if (cnt == 6) {
+//								printf("\n");
+//								cnt = 0;
+//							}
+//							else {
+//								printf(" ");
+//							}
+//						}
+//					}
+//				}
+//				k++;
+//			}
+//			j++;
+//		}
+//		i++;
+//	
+//	}
+//	return 0;
+//
+//}
+
+
+
+
+
+//打印九九乘法表
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int a = 1;
+//
+//	int count = 1;
+//
+//	for (count = 1; count <9; count++) {
+//		int sum = a * count;
+//		printf("%d*%d=%d\n  ", a, count, sum);
+//		for (a = 1; a < 9; a++) {
+//			int sum = a * count;
+//			printf("%d*%d=%d  ", a, count, sum);
+//
+//		}
+//	}
+//
+//	return 0;
+//}
+
+
+
+////各个类型占据多大的空间	sizeof
+
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int a;
+//	a = 6;
+//
+//	printf("sizeof(char)=%d\n", sizeof(char));
+//
+//	printf("sizeof(int)=%d\n", sizeof(int));
+//
+//	printf("sizeof(a)=%d\n", sizeof(a));
+//
+//	printf("sizeof(double)=%d\n", sizeof(double));
+//
+//	printf("sizeof(char)=%d\n", sizeof(char));
+//
+//	printf("sizeof(long double)=%d\n", sizeof(long double));
+//
+//	printf("sizeof(long long)=%d\n", sizeof(long long));
+// 
+// printf("sizeof(long)=%d\n\n", sizeof(long));
+//
+//	char n = 255;
+//	printf("%d\n", n);
+//
+//	int o = 255;
+//	printf("%d\n", o);
+//
+//	unsigned char c = 255;
+//	printf("%d\n", c);
+//
+//	char t = 127;
+//	t = t + 1;
+//	printf("%d\n", t);
+//
+//	return 0;
+//}
+
+
+
+
+//利用 “越界” 计算int变量的最大值
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int a = 0;
+//
+//	int b = 0;
+//
+//	while (++a > 0) {
+//		printf("int数据类型最大数是:%d\n", a - 1);
+//		b++;
+//	}
+//
+//	while ((a = a / 10)!=0) {
+//		b++;
+//	}
+//
+//	printf("int数据类型最大的数位是:%d", b);
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+/*float的scanf用% f ，printf用 %f ， %e（科学计数法）
+double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
+
+//#include <stdio.h>
+
+//int main() {
+//	double ff = 1234.56789;
+//	printf("%e\n,%f", ff, ff);
+//
+//	return 0;
+//
+//}
+
+
+
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	printf("%.3f\n", -0.0049);
+//
+//	printf("%.30f\n", -0.0049);
+//
+//	printf("%.3f\n", -0.00049);
+//
+//	return 0;
+//
+//}
+
+
+
+
+//printf输出inf表示超过范围的浮点数： +-(正负)无穷大
+//printf输出nan表示不存在的浮点数
+
+
+
+
+
+//%c可以直接输出字符
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	char a = '1';
+//
+//	char c = 1;
+//
+//	if (a == c) {
+//		printf("相等");
+//	
+//	}
+//	else printf("a=%d,c=%d 百分号d\n\n", a, c);
+//
+//	printf("a=%c,c=%d 百分号c\n\n", a, c);
+//
+//
+//
+//	if (49 == '1') {
+//		printf("OK");
+//	}
+//
+//	return 0;
+//
+//}
+
+
+
+
+//		\t：制表位
+//#include <stdio.h>
+//
+//int main() {
+//
+//	printf("1234\t1213\n123\t\n12\r\t1");
+//
+//	return 0;
+//
+//}
+
+
+
+
+//bool
+
+//#include <stdio.h>
+//#include <stdbool.h>
+//
+//int main() {
+//	bool b = 6 > 5;
+//
+//	printf("%d\n", b);
+//
+//	return 0;
+//
+//}
+
+
+
+//逻辑运算
+//	！：逻辑非	！a    不等于a，ture就是1，false就是0
+//	&&：逻辑与	a&&b   a和b同时为真，就是真，有一假就是假的
+//	||：逻辑或	a||b   a和b有真为真，两假都假
+
+//如何表达数学中的区间：比如 x属于4到6之间
+//x>4&&x<6
+
+//如何判断一个字符c是否是大写字母
+//c>='A'&&c<'Z'
+//c>'a'&&c<'z'
+
+
+
+
+//自定义函数求素数和
+
+//#include <stdio.h>
+//
+//int isprime(int i)
+//{
+//	int ret = 1;
+//
+//	int k;
+//
+//	for (k = 2; k < i - 1; k++) {
+//		if (i % k == 0) {
+//			ret = 0;
+//			break;
+//		}
+//	}
+//
+//
+//}
+//
+//int main() {
+//
+//	int m, n;
+//
+//	int sum = 0;
+//
+//	int cnt = 0;
+//
+//	int i;
+//
+//	scanf("%d %d", &m, &n);
+//
+//	if (m == 1) m = 2;
+//
+//	for (i = m; i <= n; i++) {
+//		if (isprime(i)) {
+//			sum += i;
+//			cnt++;
+//		}
+//	}
+//
+//	printf("%d个素数 素数和是%d\n", cnt, sum);
+//		
+//}
+
+
+
+
+
+//求1到10，20到30，35到45的三个和(弱智版)
+
+//#include <stdio.h>
+//
+//int main() {
+//	int a = 1;
+//	int a1 = 0;
+//
+//	int b = 20;
+//	int b1 = 0;
+//
+//	int c = 35;
+//	int c1 = 0;
+//
+//	for (a = 1; a <= 10; a++) {
+//		a1 += a;
+//		printf("1-10的加数和是%d\n", a1);
+//	}
+//
+//
+//	for (b = 1; b <= 30; b++) {
+//		b1 += b;
+//		printf("20-30的加数和是%d\n", b1);
+//	}
+//
+//	for (c = 35; c <= 45; c++) {
+//		c1 += c;
+//		printf("35-45的加数和是%d\n", c1);
+//	}
+//
+//	int sum = a1 + b1 + c1;
+//
+//	printf("%d", sum);
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+//求1到10，20到30，35到45的三个和(求和函数)
+
+//void函数名（参数表） void是没有返回值的函数
+//不能使用带值的return
+//可以没有return
+//调用的时候不能做返回值的赋值
+
+//#include <stdio.h>
+//
+//void sum(int begin, int end)
+//{
+//	int i;
+//	int sum = 0;
+//	for (i = begin; i <= end; i++) {
+//		sum += i;
+//	}
+//	printf("%d到%d的和是%d\n\n", begin, end,sum);
+//}
+//
+//int main() {
+//	sum(1, 10);
+//	sum(20, 30);
+//	sum(35, 45);
+//
+//	return 0;
+//
+//}
+
+
+//函数原型
+//自定义可以放后面，但是要把自定义函数开头的代码放在前面
+//函数头，以分号“；”结尾，就构成了函数的原型；
+//函数原型的目的是告诉编译器这个函数长什么样子
+	//名称；参数（数量及类型）；返回类型
+
+
+//#include <stdio.h>
+//
+//void sum(int begin, int end);		//声明（声明 不是函数）
+//
+//int main() {
+//	sum(1, 10);
+//	sum(20, 30);
+//	sum(35, 45);
+//
+//	return 0;
+//}
+//
+//
+//void sum(int begin, int end)	//定义
+//{
+//	int i;
+//	int sum = 0;
+//	for (i = begin; i <= end; i++) {
+//		sum += 1;
+//	}
+//	printf("%d到%d的和是%d\n", begin, end, sum);
+//}
+
+
+
+
+
+//简单函数
+//#include <stdio.h>
+//
+//void cheer() {
+//
+//	printf("cheer\n");
+//
+//}
+//
+//int main() {
+//	
+//	cheer();
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+//从函数中返回
+
+//#include <stdio.h>
+//
+//int max(int a, int b) {
+//	int ret;
+//
+//	if (a > b) {
+//		ret = 0;
+//	}
+//	else {
+//		ret = 1;
+//	}
+//}
+//
+//int main() {
+//	int a, b, c;
+//	a = 5;
+//	b = 6;
+//	c = max(10, 12);
+//	c = max(a, b);
+//	c = max(c, 23);
+//	printf("%d\n", max(a, b));
+//
+//	return 0;
+//}
+
+
+
+
+//自建函数交换a和b
+
+//#include <stdio.h>
+//
+//void swap(int a, int b)
+//{
+//	int t = a;
+//
+//	a = b;
+//
+//	b = t;
+//}
+//
+//int main(){
+//	int a = 5;
+//
+//	int b = 6;
+//
+//	swap(a, b);
+//
+//	printf("a=%d b=%d", a,b);
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
+
+//数组
+
+//#include <stdio.h>
+//
+//int main(void)
+//{
+//	int a[5] = { 1,2,3,4,5 };
+//
+//	int i;
+//
+//	for (i = 0; i < 5; i++) {
+//		printf("%d\n", a[i]);
+//	}
+//
+//	printf("%d\n", a[100]);
+//
+//	return 0;
+//}
+
+
+
+
+
+//完全初始化：	int a[5]={1,2,3,4,};
+
+//不完全初始化： int a[5]={1,2,3};
+
+//不初始化:		int a[5];  不初始化，所有元素都是垃圾值
+
+//清零	：int a[5]={0};
+
+
+
+
+
+//如果要把a数组中的值全部复制给b数组
+
+//错误的写法：
+	//b=a;
+//正确的写法：
+	//for(i=0;i<5;i++)
+		//b[i] = a[i];
+
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int a[5] = { 1,2,3,4,5 };
+//
+//	int b[5];
+//
+//	int i = 0;
+//
+//	for (i = 0; i < 5; i++) {
+//		b[i] = a[i];
+//	}
+//
+//	printf("%d", b[4]);
+//
+//	return 0;
+//}
+
+
+
+
+
+//把一个数组元素给全部倒过来
+
+//#include <stdio.h>
+//
+//int main() {
+//	int a[8] = { 1,2,3,4,5,6,7,8 };
+//
+//	int i, j;
+//	int t;
+//
+//	i = 0;
+//	j = 7;
+//
+//	while (i < j) {
+//		t = a[i];
+//		a[i] = a[j];
+//		a[j] = t;
+//
+//		i++;
+//		--j;
+//	}
+//
+//	for (i = 0; i < 7; ++i) {
+//		printf("%d\n", a[i]);
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+//数组初始化
+
+//int a[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12}
+
+//int a[3][4] = {
+//			{1, 2, 3, 4}
+//			{5, 6, 7, 8}
+//  		{9, 10,11,12}
+// };
+
+
+
+//输出数组
+#include <stdio.h>
+//
+//int main() {
+//	
+//	int a[3][4] = {
+//		{1, 2, 3, 4},
+//		{5, 6, 7, 8},
+//		{9, 10, 11, 12}
+//	};
+//
+//	int i;
+//	int j;
+//	for (i = 0; i < 3; i++) {
+//		for (j = 0; j < 4; j++)
+//			printf("%d\t", a[i][j]);
+//		printf("\n");
+//	}
+//
+//
+//	return 0;
+//}
+//
+
+
+
+
+
+
+//写一个程序计算用户输入的数字的平均数，并且输出所有大于平均数的数字
+
+//#include <stdio.h>
+//
+//int main() {
+//
+//	int x;
+//	double sum = 0;
+//	int count = 0;
+//	int number[100];
+//
+//	scanf("%d", &x);
+//
+//	while (x!= -1) {
+//		number[count] = x;
+//		sum += x;
+//		count++;
+//		scanf("%d", &x);
+//	}
+//
+//	if (count > 0) {
+//		printf("%f\n", sum / count);
+//		int i=0;
+//		if (number[i] > sum / count) {
+//			printf("%d\n", number[i]);
+//		}
+//	}
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
