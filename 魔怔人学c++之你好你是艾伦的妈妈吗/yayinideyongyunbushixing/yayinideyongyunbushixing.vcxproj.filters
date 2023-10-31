@@ -18,5 +18,8 @@
     <ClCompile Include="yayinide yongyuan bushi xing.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="waibuwenjian.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

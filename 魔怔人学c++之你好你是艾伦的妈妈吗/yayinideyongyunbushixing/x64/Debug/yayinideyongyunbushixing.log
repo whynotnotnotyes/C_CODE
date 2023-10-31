@@ -1,4 +1,2 @@
 ﻿  yayinide yongyuan bushi xing.c
-E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(2433,14): error C2057: 应输入常量表达式
-E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(2433,19): error C2466: 不能分配常量大小为 0 的数组
-E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(2433,7): error C2133: “number”: 未知的大小
+  yayinideyongyunbushixing.vcxproj -> E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\x64\Debug\yayinideyongyunbushixing.exe
