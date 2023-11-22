@@ -74,9 +74,8 @@
 //	printf("% s\n", arr1);
 //
 //	printf("%s\n", arr2);
-
-
-
+// 
+//  //strlen有有效长度和实际长度，有效长度就是有多少就数多少，实际长度就是有效长度加一，后面有\0
 //	printf("%d\n", strlen(arr1));
 //
 //	printf("%d\n", strlen(arr2));*/
@@ -2449,6 +2448,11 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //鹏哥C语言
 
+
+
+
+//全览
+
 //2023.10.23开始学
 
 
@@ -2503,7 +2507,6 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //%p   - 以地址的形式打印		
 //%x   - 打印16进制数字
 //%s   - 打印字符串		(string)
-
  
 
 
@@ -2565,16 +2568,13 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int main()
 //{
 //	
-//
-//
 //	int sum1 = 10;
 //	//sum1是局部变量，定义在代码块内的成为局部变量
 //  //大括号内部的是局部变量
 //	
-//
 //	//{
-//		//int a = 23;
-//	
+//	//	int a = 23;
+//	//
 //	//}
 //	//printf("%d\n", a);
 //	//局部变量只在局部起作用，全局变量在全局都起作用(如上所示，会报错)
@@ -2636,12 +2636,14 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
 //标识符常量
 
 //#include <stdio.h>
-//
+//  
 //#define MAX  10
-////define 标识符常量
+////define 标识符常量  define不是关键字，是预处理指令
 //
 //int main()
 //{
@@ -2701,6 +2703,41 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+//#include <stdio.h>
+//
+//enum Name
+//{
+//	mike,
+//	lucy,
+//	zhangsan,
+//	lisi
+//};
+//
+//enum Color
+//{
+//	blue,
+//	yellow,
+//	green
+//};
+//
+//int main()
+//{
+//	printf("%d\n", green);
+//	printf("%d\n", yellow);
+//	printf("%d\n", blue);
+//
+//	
+//	int arr[green] = { 0 };
+//	//数组里面只能放常量,green是枚举常量
+//	printf("%d\n", sizeof(arr));
+//
+//
+//	enum Name hg = green;
+//	printf("%d\n", hg);
+//
+//	return 0;
+//}
+
 
 
 
@@ -2711,7 +2748,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int main()
 //{
 //	char arr1[] = "abc";
-//
+//	//char类型的数组只能用双引号来定义
+//	//int类型用大括号定义
 //	//"abc"等于'a','b','c',\0(\0的值等于0)  字符串后面隐藏了一个0，\0是字符串的结束标志
 //
 //	char arr2[] = { 'a','b','c','\0'};
@@ -2730,22 +2768,22 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	printf("%d\n", strlen(arr3));
 //
 //	return 0;
-//
-//
+// 
 //}
 
-//字符串的结束标志:'\0
+//字符串的结束标志: \0
 //'\0'-转义字符-0
-// 0 是数字0
-// '0'和字符0的值一样，都是0
+// 0 是数字0 
+// '0'和字符0的值一样，都是48
 // '0'是字符0
 //  \0是转义字符，对应的ASCII表是0,数字0就是ASCII表的0,字符0('0')对应的ASCII是48
-// 
-//  0-9都是字符.a/A -z/Z也都是字符
+//
+//  字符0-9都是字符.a/A -z/Z也都是字符
 
 //EOF - end of file -文件结束标志 - 值是-1
 
 // char可以定义字符也可以定义字符串""
+
 
 
 
@@ -2761,7 +2799,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	printf("%d\n", strlen("c:\test\32\test.c"));
 //	//输出13，分别是 c : \t e s t \32 \t e s t . c
 //    // \加上一位数到三位数，就是表示一个八进制数字
-//		//string就是计算字符串的函数，所以strlen("")括号里必须要有双引号
+//		//strlen就是计算字符串的函数，所以strlen("")括号里必须要有双引号
 //
 //	printf("%c\n",'\x61');
 //	// \xdd表示一个两位数的16进制的数字
@@ -3046,6 +3084,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
 //自定义函数求两个数最大值
 
 //#include <stdio.h>
@@ -3098,7 +3137,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //}
 
 //计算机里存储的二进制都是补码，打印输出的都是原码；
-//原码取反得到反码，反码加1得到补码
+//原码符号位不变，其余取反得到反码，反码加1得到补码
 //补码减1得到反码，反码取反得到原码
 
 
@@ -3141,8 +3180,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 // (类型)强制转换
-#include <stdio.h>
-
+//#include <stdio.h>
+//
 //int main()
 //{
 //	int a = (int)3.9999;
@@ -3152,6 +3191,24 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	return 0;
 //
 //}
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//
+//	int a = 10;
+//
+//	double b = (double)a;
+//
+//	printf("%lf", b);
+//
+//	return 0;
+//
+//}
+
+
 
 
 
@@ -3309,8 +3366,10 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 // 进行计算      11111001  两个补码相加得到14+(-21)的补码，补码减一再取反得到原码
 // 补码减一      10000111  得到原码(二进制),换算成十进制等于 -7
 
-
-
+//计算机计算加法减法都是加法
+//比如14-21等于14+（-21）
+//   14-（-21）等于14+21
+//本质上都是加法
 
 
 
@@ -3486,20 +3545,1226 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
-#include <stdio.h>
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 10;
+//
+//	printf("%p\n", &a);
+//
+//	int* p = &a;
+//
+//	printf("%p\n", p);
+//
+//	return 0;
+//}
 
-int main()
-{
-	int a = 10;
 
-	printf("%p\n", &a);
 
-	int* p = &a;
+// 指针变量
+// 指针要么是4个字节要么是8个字节
+// 指针是个变量，用来存放字节
+ 
 
-	printf("%p\n", p);
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 10;
+//
+//	//& 取地址符
+//
+//	printf("%p\n", &a);
+//
+//	int* p = &a;
+//
+//	*p = 20;
+//
+//	//变量名+ *是存放地址的，也就是指针变量
+//
+//	printf("%p\n", p);
+//
+//	//&是取地址符，int*是存地址，*p是解引用操作符,也叫间接访问操作符
+// 
+//	return 0;
+//
+//}
 
-	return 0;
-}
+
+//int* 是指针变量	int是整型变量
+//int*是用来说明p是指针变量的，*p的*是解引用操作符
+
+
+
+
+
+
+//例：double
+//#include <stdio.h>
+//
+//int main()
+//{
+//	double a = 1.5;
+//
+//	double* p = &a;
+//
+//	printf("%p\n", p);
+//
+//	printf("%lf\n", a);
+//
+//	*p = 2.3;
+//
+//	printf("%lf\n", *p);
+//
+//	printf("%lf\n", a);
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	char a = 'b';
+//
+//	char* pc = &a;
+//
+//	*pc = 'a';
+//
+//	printf("%c\n", a);
+//
+//	printf("pc的字节大小是%d\n", sizeof(pc));
+//
+//	return 0;
+//	
+//}
+
+
+
+//指针在32位平台上是4个字节大小，在64位平台上是8个字节大小
+//指针为什么是4/8个字节，因为指针存放的是地址，地址是由一个32位/64位的二进制数组成的，32位/64位转换成字节就是4/8个字节
+
+
+
+
+
+
+////结构体    结构体是我们自己创造出来的类型，用来描述复杂对象
+// 
+//#include <stdio.h>
+//
+//struct Book
+//{
+//	char name[30];
+//	int price;
+//	char author[30];
+//
+//};
+//
+//int main()
+//{
+//	//  b1:利用结构体类型——创建一个该类型的结构体变量
+//	struct Book b1 = { "C语言程序设计",50,"黄冠"};
+//					
+//
+//	//利用指针打印出书名和价格
+//	struct Book* pb=&b1;
+//	
+//	printf("%s\n",(*pb).name);
+//	printf("%d\n", (*pb).price);
+//	printf("%s\n\n", (*pb).author);
+//	//*和.都是运算符有优先级，.的优先级非常高，考虑顺序,加括号确保先*再.
+//
+//	printf("%s\n", pb->name);
+//	printf("%d\n", pb->price);
+//	printf("%s\n\n", pb->author);
+//	//没星号是因为要找地址才能找到它的name，带星号的指针只是值
+//	
+//
+//
+//	printf("书名:%s\n价格:%d元\n作者:%s\n\n", b1.name, b1.price, b1.author);
+// 
+//	b1.price = 45;//修改后的价格 整型变量可以直接赋值 字符型变量要用strcopy
+// 
+//    printf("修改后的价格%d\n",b1.price);
+//
+//	strcopy(b1.name, "c语言"); 
+//    //strcopy 全称string copy- 字符串拷贝 - 是库函数，因此应该在前面加上头文件 - #include <string.h>
+//	//strcopy就是字符串更改的方式
+//
+//	return 0;
+//
+//}
+
+//     . 结构体变量.成员
+//    -> 结构体指针->成员
+
+
+
+
+
+
+
+
+
+//详细
+
+
+//1.分支(选择结构)和循环(循环结构)
+
+//C语言是一门 结构化 的程序设计语言
+// 1.顺序结构
+// 2.选择结构
+// 3.循环结构
+
+
+//分支语句:if	while
+//循环语句:while   do while   for
+
+
+//什么是语句？
+//C语言中由一个分号;隔开的就是一条语句
+//单独的一个 ; 也是语句，是空语句
+
+
+
+//if单分支
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int age = 18;
+//	
+//
+//	if (age < 18)
+//	{
+//		printf("未成年");
+//	}
+//	else
+//		printf("成年");
+//
+//	return 0;
+//}
+
+
+
+//if多分支
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int age = 0;
+//	scanf("%d", &age);
+//
+//	if (age < 18)
+//	{
+//		printf("未成年\n");
+//	}
+//	else if (age >= 18 && age <= 28) {
+//
+//		//if(18<=age<=28)   如果是这样写，年龄是18以下都会输出 青年
+//		//因为执行顺序是age等于10(假设10),10小于18,不成立，于是变成0(假),0再跟28比较,成立，输出1	
+//
+//		printf("青年\n");
+//	}
+//	else if (age >= 28 && age <= 48) {
+//		printf("中年\n");
+//	}
+//	else if (age >= 48 && age <= 98) {
+//		printf("老年\n");
+//	}
+//	else
+//		printf("老头老太\n");
+//
+//	return 0;
+//}
+
+
+
+//上面的代码也可以这样写
+//#include <stdio.h>
+
+//int main()
+//{
+//	int age = 0;
+//	scanf("%d", &age);
+//
+//	if (age < 18)
+//	{
+//		printf("未成年\n");
+//	}
+//	else
+//	{
+//		if (age >= 18 && age <= 28) {
+//			printf("青年\n");
+//		}
+//		else if (age >= 28 && age <= 48) {
+//			printf("中年\n");
+//		}
+//		else if (age >= 48 && age <= 98) {
+//			printf("老年\n");
+//		}
+//		else
+//			printf("老头老太\n");
+//	}
+//
+//}
+
+
+
+//以下这串代码会出现hehe还是haha？
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	int b = 2;
+//
+//	if (a == 1)
+//		if (b == 2)
+//			printf("hehe");
+//		else
+//			printf("haha");
+//
+//	return 0;
+//}
+
+//以上这串代码既不会输出"hehe"也不会输出"haha",因为如果没有大括号罩住，else就会离它最近的if与之匹配
+//也就是if(b==2),而if(b==2)又在if(a==1)的嵌套中,a初始化为0，所以没有进入if(a==1)
+// 自然也没有执行下面的语句，输出空
+
+
+
+
+
+//if易错点 1
+
+//以下代码会不会打印 呵呵？
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 4;
+//
+//	if (a = 5)
+//	{
+//		printf("呵呵");
+//	}
+//
+//	return 0;
+//	
+//}
+
+
+//会打印 呵呵 ，因为if(a=5)中的等号是赋值,相当于把5赋给了a,所以会打印 呵呵,
+//  == 才是等于
+
+
+
+
+
+
+
+
+
+
+//题目：判断一个数是否为奇数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//
+//	if (a%2!=0)
+//		printf("这个数是奇数\n");
+//	else
+//		printf("这个数不是奇数\n");
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//输出100以内的奇数
+
+//方法1
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	for (a = 0; a <= 100; a++)
+//	{
+//		if (a % 2 != 0)
+//			printf("%d\n", a);
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+//方法二
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 1;
+//
+//	while (a < 100)
+//	{
+//		printf("%d\n", a);
+//		a += 2;
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+//  Switch语句
+//  switch语句也是一种分支语句，常常用于多分枝的情况
+//  switch语句里没有continue,continue是循环里才有的
+
+
+//输入数字,输出星期几
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	scanf("%d", &a);
+//
+//	//if (a == 1)
+//	//	printf("星期一");
+//	//else
+//	//	if (a == 2)
+//	//		printf("星期二");
+//	//else
+//	//	if (a == 3)
+//	//		printf("星期三");
+//	//else
+//	//	if (a == 4)
+//	//		printf("星期四");
+//	//else
+//	//	if (a == 5)
+//	//		printf("星期五");
+//
+//
+//	switch (a)
+//	{
+//	case 1+0:
+//		printf("星期一\n");
+//		break;
+//	case 2:
+//		printf("星期二\n");
+//		break;
+//	case 3:
+//		printf("星期三\n");
+//		break;
+//	case 4:
+//		printf("星期四\n");
+//		break;
+//	case 5:
+//		printf("星期五\n");
+//		break;
+//	case 6:
+//		printf("星期六\n");
+//		break;
+//	case 7:
+//		printf("星期天\n");
+//		break;
+//	}
+//
+//	return 0;
+//}
+
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	switch (只能是整型表达式,可以写1+5,不能是float,double,char...)
+//	{
+//		语句项;
+//		case :(只能是整型常量表达式)
+//		break; 在switch语句中,我们没法直接实现分支,搭配break使用才能实现真正的分支
+//		//break会跳出代码块
+//	}
+//
+//}
+
+
+
+
+
+
+
+//工作日/休息日 1.
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	scanf("%d", &a);
+//
+//	switch (a >= 1 && a <= 7)
+//	{
+//	case 1:
+//	case 2:
+//	case 3:
+//	case 4:
+//	case 5:
+//		printf("工作日\n");
+//		break;
+//	case 6:
+//		printf("休息日\n");
+//		break;
+//	case 7:
+//		printf("休息日\n");
+//		break;
+//	}
+//	return 0;
+//}
+
+
+
+//工作日/休息日 2.
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	scanf("%d", &a);
+//
+//	switch (a)
+//	{
+//	case 1:
+//		if (a == 1)
+//			printf("星期一");
+//	case 2:
+//	case 3:
+//	case 4:
+//	case 5:
+//		printf("工作日\n");
+//		break;
+//	case 6:
+//	case 7:
+//		printf("休息日\n");
+//		break;
+//	default:	//default也可以放前面
+//		printf("没有这个星期\n");
+//		break;
+//	}
+//}
+
+
+
+
+
+//最后的 n 和 m分别是多少？
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int n = 1;
+//	int m = 2;
+//
+//	switch (n)
+//	{
+//	case 1:m++;
+//	case 2:n++;
+//	case 3:
+//		switch (n)
+//		{
+//			//switch支持嵌套使用
+//		case 1:n++;
+//		case 2:m++; n++; break;
+//		}
+//	case 4:m++;
+//		break;
+//	default:
+//		break;
+//	}
+//
+//	printf("n=%d\nm=%d", n, m);
+//
+//}
+
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//
+//	if (-1)	//if括号里判断真还是假，真就输出，假就结束,在计算机里面,非0就是真，0就是假 
+//		printf("hehe\n");
+//
+//	return 0;
+//}
+
+
+
+
+
+//continue 只能在循环体里面使用
+//continue作用是结束这一轮循环,回到上面
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	
+//	while (a < 10) {
+//		a++;
+//		if(a==5)
+//			continue;
+//		printf("%d\n", a);
+//		
+//	}
+//
+//	return 0;
+//}
+
+
+//break是跳过所有循环，直接终止循环
+//continue是跳过本轮循环，continue后面的代码不会执行，回到循环最开始
+
+
+
+
+
+
+//getchar()
+//getchar()的作用是键盘输入一个字符，然后接收这个字符，有点像scanf，都是输入函数
+//getchar只能读取一个字符
+//putchar的作用是把接收到的字符返还,相当于printf,都是输出函数
+
+//getchar输入字符会被转换成ascll码，所以用int，然后putchar再把ascll码转成字符输出(有待商榷)
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int ch = getchar();
+//
+//	printf("%s\n", ch);
+//
+//	putchar(ch);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int ch = 0;
+//
+//	while ((ch = getchar()) != EOF)
+//		putchar(ch);
+//
+//	return 0;
+//}
+
+
+//点击EOF,鼠标右击，选择转到定义，可以看到EOF的值是-1
+//EOF是end of file的缩写，它的值是-1
+//ctrl+z可以退出
+//ctrl+c直接退出
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int ret = 0;
+//	int ch = 0;
+//
+//	char password[20] = { 0 };
+//	//存储密码等 用数组
+//	printf("请输入密码\n");
+//
+//	scanf("%s", &password);//输入密码,并存放在psaaword数组中,注意是%s字符串,123在%d里面是一百二十三,在%s里面是字符一二三
+//	//scanf只会获取空格前面的函数
+//
+//	while ((ch = getchar()) != '\n')
+//	{	
+//		;
+//	}
+//
+//	printf("请确认密码(Y/N)");
+//
+//	getchar();  //（这行代码要删掉才能出正确运行结果）
+//	//输入缓冲区，在输入东西但还没有存放之前就是在输入缓冲区里面，当按了回车，回车前面的东西被存放了，输入缓冲区就还剩下一个
+//	//  '\n'，此时\n又被 ret = getchar()读走，所以在if判断里是else,要解决只需在前面放一个getchar()把\n读走即可
+//
+//	//getchar只能读取一个字符
+//
+//	ret=getchar();
+//
+//	if (ret == 'Y')  //注意是字符'Y'
+//		printf("已确认");
+//	else
+//		printf("取消确认");
+//
+//	return 0;
+//}
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int ch = 0;
+//	
+//	while ((ch = getchar())!=EOF)
+//	{
+//		if (ch < '0' || ch>'9')
+//			continue;
+//		else
+//			printf("ee");
+//		putchar(ch);
+//	}
+//
+//	return 0;
+//}
+
+//之所以能输出4等任何数字，是因为putchar每次只能输出单个字符，输出的数字其实是字符
+
+//if(ch<'0' || ch>'9')continue 表达的是 如果 ch小于字符0 或者 ch大于字符9,就continue
+
+//如果输入一个数字789,getchar一次只会读取一个字符，先读取字符7,字符7在字符0和字符9之间，不在if(ch<'0' || ch'9')之间
+//，所以else,输出ee,但这个循环还没有结束，回到上面，继续读取8（注意getchar读取的都是字符，所以是字符8）
+//循环一轮继续读取9，就这样经过三轮循环输出 ee7ee8ee9
+
+
+
+
+
+
+//for循环
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	for (a = 1; a <= 10; a++)  //a = 1是初始化;a<=10是判断进入到循环的条件;a++是每一轮循环的调整
+//	{	
+//		if (a == 5)
+//			continue;
+//		
+//		printf("%d\n", a);
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+// for死循环
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//
+//	for (i = 0; i < 10; i++)
+//	{
+//		if (i = 5) {
+//			printf("haha\n");
+//		}
+//		printf("hehe\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+//建议for语句的循环控制变量的取值采用"前闭后开的写法"(只是建议，具体情况具体分析)
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//
+//	int i = 0;
+//
+//	for (i = 0; i < 10; i++)
+//		//10次循环
+//		//10次打印
+//		//10个元素
+//		printf("%d\t", arr[i]);
+//
+//	return 0;
+//}
+
+
+
+
+
+//无限循环
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	for (;;)
+//		//for循环的初始化,判断,调整 都可以省略
+//		//但是:for循环的 判断部分 如果被省略，那判断条件就是:恒为真,那就会无限循环
+//	{
+//		printf("hehe");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	int i = 0;
+//
+//	for (a=0; a < 10; a++)
+//	{	
+//		for (; i < 10; i++)
+//		{		
+//			printf("hehe\n");
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//以上会打印10个hehe
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	int i = 0;
+//
+//	for (a = 0; a < 10; a++)
+//	{	
+//		for (i=0; i < 10; i++)
+//		{
+//			printf("hehe\n");
+//		}
+//	}
+//
+//	return 0;
+//}
+
+//以上会打印100次
+
+
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int x, y;
+//
+//	for (x = 0, y = 0; x < 2 && y < 5; ++x, y++)
+//	{
+//		printf("hehe\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+//以下代码循环几次？
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int x, y;
+//
+//	for (x = 0, y = 0; y = 0; x++, y++)
+//	{
+//		printf("hehe");
+//	}
+//
+//	return 0;
+//}
+
+//以上代码一次都不循环,因为for里面判断y=0是把0赋给y,for循环里判断是判断真假,真就执行,假就不执行,0就是假，非0就是真，0赋给y使得判断为0
+//自然就不执行了
+//一个等号是赋值，而不是判断
+
+
+
+
+//死循环
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 1;
+//
+//	do {
+//		
+//		if (a == 5)
+//			continue;
+//		printf("%d\n", a);
+//		a++;
+//	} while (a < 11);
+//
+//	return 0;
+//	
+//}
+
+
+
+
+
+
+
+
+//计算n的阶乘
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 0;
+//	int i = 1;
+//	int b = 2;
+//	
+//	scanf("%d", &a);
+//
+//	for (i = 1; b <= a; b++)
+//	{
+//		i *= b;
+//	}
+//
+//	printf("%d\n", i);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//题目1：计算1！+ 2! + 3! + 4! + 5!...10!
+
+//正常效率
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i =1;
+//
+//	int sum = 0;
+//
+//	int n = 1;
+//
+//	for (n = 1; n <= 10; n++)
+//	{	
+//		int ret = 1;
+//
+//		for (i = 1; i <= n; i++)
+//		{	
+//			ret *= i;
+//		}
+//
+//		sum += ret;
+//	}
+//
+//	printf("%d\n", sum);
+//
+//	return 0;
+//}
+
+
+
+
+//高效率
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 1;
+//	int sum = 0;
+//	int ret = 1;
+//
+//	for (i = 1; i<=10; i++)
+//	{
+//		ret *= i;
+//
+//		sum += ret;
+//	}
+//
+//	printf("%d\n", sum);
+//
+//	return 0;
+//}
+
+
+//计算3的阶乘只需在2的阶乘基础上乘以3就是3的阶乘，计算10的阶乘只需要在9的阶乘基础上乘以10就是10的阶乘
+
+
+
+
+
+
+
+//题目2：在一个有序数组中查找具体的某个数字。
+// 编写一个功能:在V[0]-[1]-V[2]...V[n-1]的数组中查找k的下标；
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//	int n = 9;
+//	int v[10] = {1,2,3,4,5,6,7,8,9,10};
+//
+//	int sz = sizeof(v) / sizeof(v[0]);
+//
+//	for (i = 0; i < sz; i++)
+//	{
+//		if (v[i] == n)
+//		{
+//			printf("找到了,下标是%d\n", i);
+//			break;
+//		}
+//		
+//	}
+//
+//	if (i == sz)	//如果i遍历了整个数组的元素(sz就是数组元素个数)都没有找到
+//					//为什么i==sz而不是i==sz-1，i小于sz，sz是10，i不就最多只能到9吗？
+//					//因为上面for循环i成了9结束后还要i++一次，所以i遍历结束后是10
+//		printf("找不到\n");
+//	
+//	return 0;
+//
+//}
+
+//这种方法适用于数组元素个数小的数组，遇到数组元素多的数组就会浪费很多时间,因为这样要一个一个的查找数字
+//可以用算法减少时间,比如下面的二分查找算法
+
+
+
+
+
+//拆半查找算法/二分查找算法
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//
+//	int left = 0;
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	int right = sz - 1;
+//	
+//	int k = 5;
+//
+//	while (left <= right)
+//	{
+//
+//		int mid = (left + right) / 2;
+//
+//		if (arr[mid] > k)
+//		{	//除以2的是下标，也就是0-9
+			//除的时候已经做了第一次判断了,比如9除以2得4,要找得是7，4小于元素7,然后继续
+//			right = mid-1;
+//		}
+//		else if (arr[mid] < k)
+//		{
+//			left = mid+1;
+//		}
+//		else
+//		{
+//			printf("找到了,下标是%d\n", mid);
+//			break;
+//		}
+//	}
+//
+//	if (left > right)
+//		printf("找不到");
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+//题目3：编写题目,演示多个字符从两端移动,向中间汇聚
+ 
+//整型数组不用考虑下标\0结束符得问题，但字符串数组需要考虑sizeof元素个数加1
+//整型数组计算元素个数可以用sizeof
+//字符数组计算元素个数（元素长度）可以用strlen
+//字符型数组赋值号右边可以用""也可以用{}，看你要存什么
+
+//#include <stdio.h>
+//#include <string.h>
+//#include <windows.h>
+//#include <stdlib.h>
+//
+//int main()
+//{
+//	char arr1[] = "welcome to bit!!!";
+//	char arr2[] = "#################";
+//
+//	int left = 0;
+//	int right = strlen(arr2)-1;
+//
+//	while (left <= right)
+//	{
+//		arr2[left] = arr1[left];
+//		arr2[right] = arr1[right];
+//
+//		printf("%s\n", arr2);
+//		//字符串数组可以直接输出，比如上面的arr2，不用写成arr[]..
+//
+//		Sleep(1000);
+//		//意思是休息1秒，单位是毫秒，1000毫秒等于1秒，使用这个库函数要引一个<windows.h>的头文件,S是大写
+//
+//		system("cls");
+//		//执行系统命令的一个库函数，需要引一个<stdlib.h>的头文件
+//
+//		left++;
+//		right--;
+//	}
+//
+//	printf("%s\n", arr2);
+//
+//	return 0;
+//}
+
+
+
+
+
+//题目4：编写代码实现,模拟用户登录情景,并且只能登录三次
+// (只允许输入三次密码如果密码正确则提示登录成功，如果三次均输入错误，则退出程序)
+
+
+
+//#include <stdio.h>
+//
+//
+//int main()
+//{
+//	int i = 0;
+//	char password[20] = { 0 };
+//
+//	for (i = 0; i < 3; i++) {
+//		printf("请输入密码:>");
+//		scanf("%s", &password);
+//
+//		//strcmp的作用是把两个字符串传给strcmp,然后比较两个字符是否相等，是库函数，要引一个<string.h>的头文件 
+//		//如果第一个字符串大于第二个字符串，返回正数(1)，如果小于第二个字符串返回负数(-1),如果两个字符串相等,返回0;
+//
+//		if (strcmp(password, "123456") == 0)
+//		{
+//			printf("登录成功\n");
+//			break;
+//		}
+//		else
+//			printf("密码错误\n");
+//	
+//	}
+//
+//	if (i == 3)
+//		printf("三次密码均输入错误\n");
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
+
 
 
 
