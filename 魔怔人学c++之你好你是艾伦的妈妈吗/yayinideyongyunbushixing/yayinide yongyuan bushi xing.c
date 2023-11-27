@@ -2448,6 +2448,10 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //鹏哥C语言
 
+//1.ctrl+f是搜索
+//2.不用一直建立新的源代码，一个源代码就够了，要学新的代码直接把前面的注释就好了
+//3.标记好题目，想重温题目就ctrl+f:题目
+
 
 
 
@@ -4017,6 +4021,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	{
 //		语句项;
 //		case :(只能是整型常量表达式)
+//      char也是整型常量，因为char存储的是ASCII值，也就是整型常量
 //		break; 在switch语句中,我们没法直接实现分支,搭配break使用才能实现真正的分支
 //		//break会跳出代码块
 //	}
@@ -4167,6 +4172,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //break是跳过所有循环，直接终止循环
 //continue是跳过本轮循环，continue后面的代码不会执行，回到循环最开始
+//break和continue都是只跳过循环，不跳过判断(if)
 
 
 
@@ -4689,7 +4695,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int main()
 //{
 //	char arr1[] = "welcome to bit!!!";
-//	char arr2[] = "#################";
+//	char arr2[] = "                 ";
 //
 //	int left = 0;
 //	int right = strlen(arr2)-1;
@@ -4761,9 +4767,428 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+//题目:输入三个数，输出最大值
+
+//解法 1:
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a, b, c = 0; 0; 0;
+//
+//	scanf("%d %d %d", &a, &b, &c);
+//
+//	int max = 0;
+//
+//	if (a > b) {
+//		if (a > c) {
+//			max = a;
+//		}
+//		else
+//			max = c;
+//	}
+//	else if (b > a) {
+//		if (b > c) {
+//			max = b;
+//		}
+//		else
+//			max = c;
+//	}
+//
+//	printf("最大的数字是%d\n", max);
+//
+//	return 0;
+//
+//}
+
+
+//解法 2:
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int max = 0;
+//	int a = 0;
+//
+//	for (a = 0; a != EOF; )
+//	{
+//		scanf("%d", &a);
+//
+//		if (a > max)
+//			max = a;
+//	}
+//
+//	printf("最大的数字是%d\n", max);
+//
+//	return 0;
+//}
 
 
 
+//题目：打印1-100的3的倍数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 3;
+//
+//	while (a < 100)
+//	{
+//		if (a % 3 == 0) {
+//			printf("%d\n", a);
+//		}
+//		a++;
+//	}
+//	return 0;
+//}
+
+
+
+
+//题目：输入3个数，从大到小输出;
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a, b, c = 0; 0; 0;
+//
+//	scanf("%d %d %d", &a, &b, &c);
+//
+//	int tmp;
+//
+//	if (a < b)
+//	{
+//		tmp = b;
+//		b = a;
+//		a = tmp;
+//	}
+//	if (b < c)
+//	{
+//		tmp = c;
+//		c = b;
+//		b = tmp;
+//	}
+//	if (a < c)
+//	{
+//		tmp = c;
+//		c = a;
+//		a = tmp;
+//	}
+//	
+//	printf("%d %d %d\n", a, b, c);
+//
+//	return 0;
+//}
+
+//解析：三个数字按大小排序，照常按照abc等级排列就好了，a是最大，b是第二，c是最后
+// 如果b>a，那么就把a和b的值对调，因为a最大,b第二
+// 然后a和c比，如果c比a大，a和c的值就对调，这样原先的a就变成c了，然而原先的a和b比过，是要比b大的
+// 所以现在的c还要和b比一下大小;
+
+
+
+
+//题目：给定两个数，求两个数的最大公约数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a, b = 0; 0;
+//	scanf("%d %d", &a, &b);
+//
+//	int c = 0;
+//
+//	while (c=a%b) //这里不用写c=a%b!=0，因为a%b是非0进入循环，如果a%b是0,那就if判断条件是0，不进入循环了
+//	{
+//		//编程出现的问题:我把b=c放在前面，a = b放在后面
+//		//导致c的值赋给b了，然后又把b的值赋给a了，相当于把c的值又赋给b又赋给a了，所以程序一轮就执行完了
+//		a = b;
+//		b = c;
+//		
+//		//c = a % b;这条可以省略，因为while循环里面每一轮都已经执行这条了
+//	}
+//
+//	printf("最大公约数为%d\n", b);
+//
+//	return 0;
+//}
+
+
+//以上用的是辗转相除法
+
+
+
+
+//题目：打印1000年-2000的闰年
+//闰年：1.能被4整除并且不能被100整除的年份  或
+//      2.能被400整除是闰年
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//	int count = 0;
+//
+//	for (i = 1000; i <= 2000; i++)
+//	{	
+//
+//		if (i % 4 == 0 && i % 100 != 0) {
+//			printf("%d\n", i);
+//			count++;
+//		}
+//		else if (i % 400 == 0) {
+//			printf("%d\n", i);
+//			count++;
+//		}
+//
+//	}
+//
+//
+//	printf("以上是1000年到2000年的闰年\n,总共有%d个闰年",count);
+//
+//	return 0;
+//}
+
+
+
+
+
+//题目：打印100-200的素数
+
+//解法1：
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//	int ret = 0;
+//	int count = 0;
+//
+//	for (i = 100; i <= 200; i++) {
+//		for (ret = 2; ret < i; ret++) {
+//			if (i % ret == 0) 
+//			{
+//				break;
+//				//这个break是跳出最近的循环，而不是if，break的作用是跳出循环，而不是跳出判断
+//			}
+//			if (ret == (i-1))
+//			{
+//				printf("%d\n", ret);
+//				count++;
+//			}
+//		}
+//	}
+//
+//	printf("总共%d个素数\n", count);
+//
+//	return 0;
+//}
+
+//以上方法叫试除法
+
+
+
+//解法2：
+
+//#include <stdio.h>
+//#include <math.h>
+//
+//int main()
+//{
+//	int i = 0;
+//	int ret = 0;
+//	int count = 0;
+//
+//  //偶数绝对不可能是素数，所以可以不从100开始，从101开始，每次加2，奇数加2还是等于奇数
+// 
+//	for (i = 101; i <= 200; i+=2) {
+//		//sqrt是一个数学库函数，作用是开平方，要引一个<math.h>的头文件,sqrt是头文件
+//      //下面for()里面的ret<=sqrt(i)也可以写成i/2，因为一个数一半一定大于这个数的开平方
+//		for (ret = 2; ret <= sqrt(i); ret++) {
+//			if (i % ret == 0)
+//			{
+//				break;
+//			}
+//		}
+//			if (ret > sqrt(i))
+//			{
+//				printf("%d\n", i);
+//				count++;
+//			}
+//	}
+//
+//	printf("总共%d个素数\n", count);
+//	return 0;
+//}
+
+//要求一个数是否是素数，还可以被这个数的2-开平方的数 所除，如果2-开平方的数都除完没有剩下，余数都不为0，那么这个数就是素数
+
+
+
+
+
+//sqrt演示
+
+//#include <stdio.h>
+//#include <math.h>
+//
+//int main()
+//{
+//	int a = 103;
+//
+//	double b = sqrt(a);
+//
+//	printf("%f\n", b);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//题目：输出1-100整数以内所有含有9数字的个数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//	int count = 0;
+//
+//	for (i = 0; i < 100; i++)
+//	{
+//		if (i % 10 == 9)
+//		{
+//			printf("%d\n", i);
+//			count++;
+//		}
+//
+//		if (i / 10 == 9)
+//		{
+//			printf("%d\n", i);
+//			count++;
+//		}
+//	}
+//
+//	printf("1-100内含9的数字的个数是%d\n", count);
+//
+//	return 0;
+//}
+
+
+
+
+
+//题目：分数求和
+//计算1/1 - 1/2 + 1/3 - 1/4 + 1/5......+ 1/99 - 1/100的值，打印出结果
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	double i = 1.0;
+//	double sum = 0.0;
+//	int flag = 1;
+//
+//	for (i = 1; i <= 100; i++)
+//	{
+//		sum += flag * 1 / i;
+//		//要想得到小数，除号两边有一边必须为浮点数
+//		flag = -flag;
+//	}
+//
+//	printf("%lf\n", sum);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//题目：求10个整数的最大值
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	//这个程序有问题，只能求整数的最大值，因为所有数要和max比较，max是0，当负数跟max比较时，max还是0
+//	int arr[] = {1,2,3,4,5,6,77,88,9,10};
+//
+//	int max = 0;
+//
+//	int i = 0;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	for (i = 0; i < sz; i++)
+//	{
+//		if (arr[i] > max)
+//			max = arr[i];
+//	}
+//
+//	printf("%d\n", max);
+//
+//	return 0;
+//}
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[] = { -6,-2,-3,-4,-5 };
+//
+//	int i = 0;
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	int max = arr[0];
+//
+//	for (i = 1; i < sz; i++)
+//	{
+//		if (arr[i] > max)
+//			max = arr[i];
+//	}
+//
+//	printf("%d\n", max);
+//
+//	return 0;
+//}
+
+
+
+
+
+//题目：打印9*9乘法口诀打印
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int i = 0;
+//
+//	for (i = 1; i < 9; i++)
+//	{
+//		int j = 0;
+//		for (j = 1; j <=i; j++)
+//		{
+//			printf("%d*%d*%d%\t", i, j, i * j);
+//		}
+//
+//		printf("\n");
+//	}
+//	return 0;
+//}
 
 
 
