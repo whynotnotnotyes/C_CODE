@@ -1043,6 +1043,7 @@
 
 
 //猜数游戏
+
 //#include <stdio.h>
 //
 //int main() {
@@ -3826,6 +3827,35 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+//题目：以下代码会输出什么？
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 7;
+//
+// 
+//	if (a > 10)
+//		printf("ee\n");
+//	else if (a >= 7)
+//		printf("hello\n");
+//	else if (a <= 7)
+//		printf("hehe\n");
+//
+//	return 0;
+//}
+
+//虽然7既大于等于7 又小于等于7 ，但是if只会输出判断成功后的代码，下面的代码虽然符合条件但也不执行了;
+
+
+
+
+
+
+
+
+
 //以下这串代码会出现hehe还是haha？
 
 //#include <stdio.h>
@@ -3848,6 +3878,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //以上这串代码既不会输出"hehe"也不会输出"haha",因为如果没有大括号罩住，else就会离它最近的if与之匹配
 //也就是if(b==2),而if(b==2)又在if(a==1)的嵌套中,a初始化为0，所以没有进入if(a==1)
 // 自然也没有执行下面的语句，输出空
+
+
 
 
 
@@ -5182,13 +5214,114 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //		int j = 0;
 //		for (j = 1; j <=i; j++)
 //		{
-//			printf("%d*%d*%d%\t", i, j, i * j);
+//			printf("%d*%d=%-2d", i, j, i * j);
+//			//%2d是右对齐，打印两位的意思，没有两位会空格补齐
+//			//%-2d是向左对齐打印两位,不够两位会把空格填充在右边
 //		}
 //
 //		printf("\n");
 //	}
 //	return 0;
 //}
+
+
+
+
+
+
+//题目，猜数游戏
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+//void是返回值类型，表示这个函数不返回值，menu是这个函数的名称，随意取的
+void menu(){
+	printf("**************************\n");
+	printf("******1.play  2.exit******\n");
+	printf("**************************\n");
+}
+
+void game()
+{
+
+	//拿时间戳来设置随机数的生成起始点
+	//要生成一个随机数，需要用到生成随机库函数rand,调用rand前面要使用srand(),srand()里存的参数是unsigned int
+	// ,调用时间戳time()来生成随机数起点，时间戳的类型是long，所以要强制转换成unsigned int
+	//time()是时间戳的库函数，要引一个time.h的头文件
+	//时间戳是均匀变化的
+
+	int ret = 0;
+
+	//srand((unsigned int)time(NULL));
+	//srand生成随机数的起点，只要在代码里面调用一次就行了，不要频繁的设置生成随机数的起点，所以放在主函数里面;
+	
+	ret = rand()%100+1;//生成随机数
+	//为什么要+1，因为rand最大是6位数，模上100就剩下两位数，范围是0-99，
+	// 要实现生成1-100的随机数，就要+1
+
+	int a = 0;
+	int count = 0;;
+
+	while (1)
+	{
+		printf("请猜数字:>");
+
+		scanf("%d", &a);
+
+		if (a > ret)
+		{
+			printf("大了\n");
+		}
+		else if (a < ret)
+		{
+			printf("小了\n");
+		}
+		else if (a == ret)
+		{
+			printf("恭喜你，猜对啦!\n");
+			break;
+		}
+		count++;
+	}
+	printf("找的次数是%d\n", count);
+}
+
+int main()
+{
+	int input = 0;
+
+	srand((unsigned int)time(NULL));
+	//srand生成随机数的起点，只要在代码里面调用一次就行了，不要频繁的设置生成随机数的起点，所以放在主函数里面;
+	
+	do {
+		menu();
+		printf("请选择\n\n");
+		scanf("%d", &input);
+		
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 2:
+			printf("退出游戏\n\n");
+			break;
+		default:
+			printf("选择错误\n\n");
+			break;
+		}
+	
+	}while (input);
+
+	return 0;
+}
+
+
+
+
+
+
 
 
 
