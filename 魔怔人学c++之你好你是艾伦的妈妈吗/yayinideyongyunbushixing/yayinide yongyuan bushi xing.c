@@ -76,6 +76,7 @@
 //	printf("%s\n", arr2);
 //
 //  //strlen有有效长度和实际长度，有效长度就是有多少就数多少，实际长度就是有效长度加一，后面有\0
+//  //strlen返回的是\0
 //	printf("%d\n", strlen(arr1));
 //
 //	printf("%d\n", strlen(arr2));*/
@@ -2457,6 +2458,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //1.ctrl+f是搜索
 //2.不用一直建立新的源代码，一个源代码就够了，要学新的代码直接把前面的注释就好了
 //3.标记好题目，想重温题目就ctrl+f:题目
+//4.自定义函数的调用是调用头文件.h,不是调用函数名.h
 
 
 
@@ -2780,6 +2782,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	return 0;
 // 
 //}
+
+//strlen返回的是整型
 
 //字符串的结束标志: \0
 //'\0'-转义字符-0
@@ -5243,8 +5247,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 ////void是返回值类型，表示这个函数不返回值，menu是这个函数的名称，随意取的
 //void menu(){
+//  printf("这是个猜数游戏 随机1-100的值\n");
 //	printf("**************************\n");
-//	printf("******1.play  0.exit******\n");
+//	printf("******1.开始   0.退出******\n");
 //	printf("**************************\n");
 //}
 //
@@ -5878,18 +5883,504 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //#include <stdio.h>
 //
-// add(int* x)
+////用不上返回值，所以用void
+//
+//void diaoyong(int* p)
 //{
-//	*x++;
+//	(*p)++;
+//	//++的优先级别比*高，所以解引用操作符*要加括号，不然就是先p++再*
 //}
 //
 //int main()
 //{
-//	int num = 0;
-//	
-//	add(&num);
+//	int num = 1;
 //
-//	printf("%d\n", num);
+//	diaoyong(&num);
+//	printf("num=%d\n", num);
+//
+//	diaoyong(&num);
+//	printf("num=%d\n", num);
+//
+//	diaoyong(&num);
+//	printf("num=%d\n", num);
+//
+//	diaoyong(&num);
+//	printf("num=%d\n", num);
+//
+//	return 0;
+//
+//}
+
+
+
+
+
+
+
+
+//函数的嵌套调用和链式访问
+
+//函数和函数之间可以有机的组合的
+
+
+//函数的嵌套调用
+
+//#include <stdio.h>
+//
+//void new_line()
+//{
+//	printf("加油黄冠\n");
+//}
+//
+//void three_line()
+//{
+//	int i = 0;
+//
+//	for (i = 0; i < 3; i++)
+//	{
+//		new_line();
+//	}
+//}
+//int main()
+//{
+//	three_line();
 //
 //	return 0;
 //}
+
+
+
+
+//函数链式访问
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	// 1.
+//	int len = 0;
+//
+//	len = strlen("abc");
+//
+//	printf("%d\n", len);
+//
+//	// 2.
+//	printf("%d\n", strlen("abc"));
+//
+//	return 0;
+//}
+
+
+//printf链式访问
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	printf("%d", printf("%d\n", printf("%d\n", 43)));
+//	//每一个printf函数返回的都是打印的字符的个数
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//函数的声明与定义
+
+//函数声明：
+		//1.告诉编译器有一个函数叫什么，参数是什么，返回类型是什么。但具体是不是存在，无关紧要
+		//2.函数的声明一般出现在函数的使用之前。要满足先声明后使用
+		//3.函数的声明一般要放在头文件中
+//函数的定义：
+		//  函数的定义是指函数的具体实现，交待函数的功能实现
+
+
+
+//在工作中，函数的定义和声明和源文件一般不在同一个源文件中
+
+//#include <stdio.h>
+//
+////函数的声明
+//int sum(int x, int y);
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int sum = add(a, b);
+//
+//	printf("sum=%d\n", sum);
+//
+//	return 0;
+//}
+//
+////函数的定义
+//int add(int x, int y)
+//{
+//	int z = 0;
+//	z = x + y;
+//
+//	return z;
+//}
+
+
+
+//工作情况：
+//函数的声明放在.h文件中，函数的定义放在.c文件中
+//库函数头文件用<.h>  ,  自己写的函数的头文件用".h"
+
+//#include <stdio.h>
+//#include "add.h"
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int sum = 0;
+//		
+//	sum = add(a, b);
+//
+//	printf("sum=%d\n", sum);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+//二分查找函数(工作模式)
+
+//#include <stdio.h>
+//#include "add.h"
+//
+//
+//int main()
+//{
+//	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//
+//	int k = 7;
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	int ret = binary_search(arr, k, sz);
+//
+//	if (ret == -1)
+//	{
+//		printf("你查找的数不存在");
+//	}
+//	else
+//		printf("找到了,下标是%d\n", ret);
+//
+//	return 0;
+//	
+//}
+
+
+
+
+//猜数游戏函数(工作模式)
+// 
+//#include <stdio.h>
+//#include "add.h"
+//#include <time.h>
+//#include <stdlib.h>
+//
+//int main()
+//{
+//	int input = 0;
+//	
+//	srand((unsigned int)time(NULL));
+//
+//	do {
+//		menu();
+//
+//		scanf("%d", &input);
+//
+//		switch (input)
+//		{
+//		case 1:
+//			game();
+//			break;
+//		case 0:
+//			printf("退出游戏\n");
+//			break;
+//		default:
+//			printf("选择错误\n");
+//			break;
+//		}
+//	}while (input);
+//
+//	return 0;
+//}
+
+
+
+
+
+//#ifndef __ADD_H__
+// 如果函数未定义
+//#define __ADD_H__
+// 那就定义一个函数
+//#endif
+//结束
+
+//如果函数已经定义，那就不再定义，为了防止重复定义
+
+
+//#include <stdio.h>
+//#include "add.h"
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int sum = ADD(a, b);
+//
+//	printf("%d\n", sum);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+//递归
+
+// 什么是递归：
+// 程序调用自身的编程技巧称为递归(recursion).递归做为一种算法在程序设计语言中广泛应用。
+// 一个过程或函数在其定义或说明中有直接或间接调用自身的一种方法，它通常把一个大型复杂的问题
+// 层层转化为一个与原问题相似的规模较小的问题来求解，递归策略只需要少量的程序就可以描述出解题过程所需要的多次重复计算
+// 大大减少了程序的代码量，递归的主要思考方式在于：把大事化小
+
+//一个函数可以调用别的函数，一个函数调用自己就是递归
+
+//递归常见的错误:Stack overflow  栈溢出
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	printf("hehe\n");
+//
+//	main();
+//
+//}
+
+
+
+
+//递归实现 正序输出无符号整型变量  eg:输入1234 输出1 2 3 4
+
+//#include <stdio.h>
+//
+//void print(int n)
+//{
+//	if (n > 9)
+//	{
+//		print(n / 10);
+//	}
+//	printf("%d ", n % 10);
+//}
+//
+//int main()
+//{
+//	unsigned int num = 0;
+//
+//	scanf("%d", &num);
+//
+//	print(num);
+//
+//	return 0;
+//}
+
+//递归的两个必要条件
+//1.存在限制条件，当满足这个限制条件的时候，递归便不再继续
+//2.每次递归调用之后越来越接近这个限制条件
+
+
+
+
+//题目:编写函数不允许创建临时变量，求字符串长度
+//临时变量是一种只在调用期间有效，且具有常性的变量
+
+//strlen的实现原理(我猜的)
+
+
+//以下是允许创建临时变量的情况
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int my_strlen(char* str)
+//{
+//	int count = 0;
+//
+//	while (*str != '\0')
+//	{
+//		count++;
+//		str++; //数组开辟的是连续的空间，str存放第一个字符的地址，str++就是地址向后延续，就是第二个字符的地址
+//	}
+//	return count;
+//}
+//
+//int main()
+//{
+//	char arr[] = "bite";
+//
+//	int len = my_strlen(&arr);  //arr是数组，数组传参，传过去的不是整个数组，是首元素的地址
+//
+//	printf("%d\n", len);
+//
+//	return 0;
+//}
+
+
+
+
+//以下是不允许创建临时变量的情况
+//#include <stdio.h>
+//#include <string.h>
+//
+//int my_strlen(char* str)
+//{
+//	if (*str != '\0')
+//	{
+//		return 1 + my_strlen(str + 1);
+//		//为什么不是*str+1而是str+1，因为*str就是b，而str是str的地址
+//		//为什么str是str的地址，因为main主函数传上来的就是数组的地址
+//	}
+//	else
+//		return 0;
+//}
+//
+//int main()
+//{
+//	char arr[] = "bite";
+//
+//	int len = my_strlen(&arr);  //arr是数组，数组传参，传过去的不是整个数组，是首元素的地址
+//
+//	printf("%d\n", len);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//递归实现阶乘
+
+//#include <stdio.h>
+//
+//int fac(int n)
+//{
+//	if (n <= 1)
+//		return 1;
+//	else
+//		return n * fac(n - 1);
+//}
+////5 *
+////4 *
+////3 *
+////2 *
+////1 *
+//int main()
+//{
+//	int n = 0;
+//	int ret = 0;
+//
+//	scanf("%d", &n);
+//
+//	ret = fac(n);
+//
+//	printf("%d\n", ret);
+//
+//}
+
+
+
+
+//题目：求出第n个斐波那契数
+//用递归和循环都可以解决，但是循环更适合这个代码
+
+//1.
+
+//#include <stdio.h>
+//
+//int fib(int n)
+//{
+//	int a = 1;
+//	int b = 1;
+//	int c = 1;//为什么c是1，因为如果n=1，就不会进入循环，就会返回c，c是0的话就错了
+//
+//	while (n > 2)
+//	{
+//		c = a + b;
+//		a = b;
+//		b = c;
+//
+//		n--;
+//	}
+//	
+//	return c;
+//
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//
+//	int ret = fib(n);
+//
+//	printf("ret=%d\n", ret);
+//
+//	return 0;
+//}
+
+
+
+
+//2.
+
+//#include <stdio.h>
+//
+//int fib(int n)
+//{
+//	if (n <= 2)
+//		return 1;
+//	else
+//		return fib(n - 1) + fib(n - 2);
+//
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//
+//	int ret = fib(n);
+//
+//	printf("ret=%d\n", ret);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
