@@ -2459,6 +2459,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //2.不用一直建立新的源代码，一个源代码就够了，要学新的代码直接把前面的注释就好了
 //3.标记好题目，想重温题目就ctrl+f:题目
 //4.自定义函数的调用是调用头文件.h,不是调用函数名.h
+//5.如果遇到喷麦的时候，右键点击视频音效，选择 清澈人声
 
 
 
@@ -4064,7 +4065,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //		case :(只能是整型常量表达式)
 //      char也是整型常量，因为char存储的是ASCII值，也就是整型常量
 //		break; 在switch语句中,我们没法直接实现分支,搭配break使用才能实现真正的分支
-//		//break会跳出代码块
+//		//break的作用是跳出循环(while,for,do while)和switch
 //	}
 //
 //}
@@ -5264,7 +5265,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	int ret = 0;
 //
-//	//srand((unsigned int)time(NULL));
+//	//srand((unsigned int)time(NULL));   //time函数，参数给空指针
 //	//srand生成随机数的起点，只要在代码里面调用一次就行了，不要频繁的设置生成随机数的起点，所以放在主函数里面;
 //	
 //	ret = rand()%100+1;//生成随机数,要引一个<stdlib.h>的头文件
@@ -5302,7 +5303,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	int input = 0;
 //
-//	srand((unsigned int)time(NULL));
+//	srand((unsigned int)time(NULL));   //time函数，参数给空指针
 //	//srand生成随机数的起点，只要在代码里面调用一次就行了，不要频繁的设置生成随机数的起点，所以放在主函数里面;
 //	
 //	do {
@@ -5653,16 +5654,17 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	swap2(&a, &b);
 //	//传址调用：传址调用是把函数外部创建变量的内存地址传递给函数参数的一种调用函数的方式
-//    //这种传参方式可以让函数和函数外边的变量建立起真正的联系，也就是函数内部可以直接操作
+//  //这种传参方式可以让函数和函数外边的变量建立起真正的联系，也就是函数内部可以直接操作
 //
 //	printf("a=%d b=%d\n\n", a, b);
-//  //swap(a,b);  //实参 实参可以穿变量
+//  //swap(a,b);  //实参 实参可以传变量
 //  //swap2(&a, &b); //实参 实参可以传地址
 //  //swap(300,100); 实参可以传常量
 //  //swap(300+1,100); 实参可以传表达式
 //    max = get_max(a,get_max(b,c)); //实参可以传函数
 //
 //	printf("a=%d\n\n", max);
+//	printf("max=%d\n",get_max(a,get_max(b,c))); //库函数也可以调用自定义函数
 //
 //	return 0;
 //
@@ -5674,6 +5676,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //形式参数（形参）：形式参数是指函数名后括号中的变量，因为形式参数只有在函数被调用的过程中才实例化（分配内存单元）
 //所以叫做形式参数。形式参数当函数调用完成之后就自动销毁了。因此形式参数只在函数中有效
 
+//形参是实参的一份临时拷贝，传数组的时候电脑不会这么傻把全部传过去，因为如果一个数组有一万个元素
+//相当于把存储空间涨了一倍，所以为了避免空间浪费，只是传过去数组首元素的第一个地址
+
 
 
 
@@ -5681,34 +5686,28 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //#include <stdio.h>
 //
-//int num(x)
+//int is_prime(int n)
 //{
-//	int number = 0;
-//	
 //	int i = 0;
 //
-//	for (i = 2; i < x; i++)
+//	for (i = 2; i < n; i++)
 //	{
-//		if (x % i == 0)
+//		if (n % i == 0)
 //		{
-//			break;
+//			return 0;
 //		}
-//
-//		if (i == (x - 1))
-//		{
-//			number = 1;
-//		}
+//		else if (i == (n - 1))
+//			return 1;
 //	}
 //
-//	return number;
 //}
 //
 //int main()
 //{
-//	int a = 0;
-//	scanf("%d", &a);
+//	int i = 0;
+//	scanf("%d", &i);
 //
-//	if (num(a) == 1)
+//	if (is_prime(i) == 1)
 //	{
 //		printf("这个数是素数\n");
 //	}
@@ -5734,6 +5733,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //		if (n % j == 0)
 //		{
 //			return 0;
+//			//为什么这里只能写return 0,不能写break,因为break跳出for循环后，就return 1了;
 //			//break只跳出for循环
 //			//return会直接跳出函数
 //		}
@@ -5768,16 +5768,17 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //#include <stdio.h>
 //
-//int year(x)
+//int year(int a)
 //{
-//	int i = 0;
-//
-//	if ((x % 4 == 0 && x % 100 != 0) || x % 400 == 0)
+//	if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))
 //	{
-//		i = 1;
+//		return 1;
 //	}
-//
-//	return i;
+//	else
+//	{
+//		return 0;
+//	}
+//		
 //}
 //
 //int main()
@@ -5787,10 +5788,12 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	if (year(a) == 1)
 //	{
-//		printf("这一年是闰年\n");
+//		printf("这年是闰年\n");
 //	}
-//	else
-//		printf("这一年不是闰年\n");
+//	else if (year(a) == 0)
+//	{
+//		printf("这年不是闰年\n");
+//	}
 //
 //	return 0;
 //}
@@ -5980,6 +5983,10 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	printf("%d", printf("%d\n", printf("%d\n", 43)));
 //	//每一个printf函数返回的都是打印的字符的个数
+// 
+//  printf("%d\n",printf("%d\n",printf("%d\n",4567)));
+//  //转义字符'\n'也是一位数
+//
 //	return 0;
 //}
 
@@ -6097,7 +6104,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	int input = 0;
 //	
-//	srand((unsigned int)time(NULL));
+//	srand((unsigned int)time(NULL));  //time函数，参数给空指针
 //
 //	do {
 //		menu();
@@ -6290,6 +6297,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //		return 1;
 //	else
 //		return n * fac(n - 1);
+//	  //当n=1的时候，return的1是整个fac(n-1)的结果 
 //}
 ////5 *
 ////4 *
@@ -6315,7 +6323,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //题目：求出第n个斐波那契数
 //用递归和循环都可以解决，但是循环更适合这个代码
 
-//1.
+//1.循环
 
 //#include <stdio.h>
 //
@@ -6353,7 +6361,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
-//2.
+//2.递归
 
 //#include <stdio.h>
 //
@@ -6379,8 +6387,472 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //}
 
 
+//写代码用循环解决还是递归解决都行，递归效率高代码简单，但是会栈溢出
+
+//#include <stdio.h>
+//
+//void test(int n)
+//{
+//	if (n < 10000)
+//		test(n + 1);
+//}
+//
+//int main()
+//{
+//	test(1);
+//	return 0;
+//}
+
+//并不是说递归满足两个必要条件就不会栈溢出了，比如以上代码
 
 
+
+
+
+
+
+
+
+
+//数组
+
+//数组是一组相同类型元素的集合。
+//数组的创建方式: type_t  arr_name  [const_n]
+               //type_t 是指数组的元素类型
+			   // arr_name是指数组的元素名
+			   //const_n是一个常量表达式，用来指定数组的大小
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[10] = { 1,2,3 };
+//	//整型数组不完全初始化，剩下的元素默认初始化为0
+//
+//	char arr2[5] = { 'a','b','c' };
+//	//以上是字符数组，剩下元素默认初始化为\0
+//
+//	char arr3[5] = { 'a',98 };
+//	//98会变成b,因为这是字符数组，98在ASCII码表里面对应的字符是b,就会解析成b
+//
+//	char arr4[7] = "abc";
+//	//以上是字符串数组，abc后面还有一个\0
+//
+//	char arr5[] = "abcdefg";
+//	//不指定大小，g后面还会有一个'\0'
+//
+//	char arr6[3] = { 1,2,3 };
+//
+//	return 0;
+//}
+
+//总之不管怎么样，字符串数组后面都会有一个'\0'，因为这是判断数组结束的标志
+//整型数组后面没有\0，未完全初始化整型数组后面默认为0
+//字符数组和整型数组后面都没有\0
+
+
+//sizeof和strlen没有什么关系
+
+//#include <stdio.h>
+//#include <string.h>
+//int main()
+//{
+//	char arr[] = "abcdef";
+//
+//	printf("%d\n", sizeof(arr));
+//	//sizeof是计算arr所占空间的大小，单位是字节,\0也会占空间，所以\0也算进空间
+//	printf("%d\n", strlen(arr));
+//	//strlen是计算字符串数组的长度，到\0就停止，所以\0不算进长度
+//
+//	return 0;
+//}
+
+
+//sizeof和strlen没有什么关联
+//strlen是求字符串长度的-只能针对字符串求长度 - 库函数 - 得引头文件
+//sizeof是计算变量，数组，类型的大小-单位是字节-操作符(像加减乘除就是操作符，不是函数，不用引头文件)
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	char arr[] = "abc";
+//	//未初始化和完全初始化都是4个元素，但是未初始化监视窗口会显示\0
+//	char arr1[3] = "abc";
+// 
+//}
+
+
+
+
+
+
+//题目：以下sizeof和strlen各是多少？
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	char arr1[] = "abc";
+//	char arr2[] = { 'a','b','c' };
+//
+//	printf("%d\n", sizeof(arr1));
+//	//arr1是字符串数组，字符串以\0结尾，所以字符串后面都会有\0，所以占据4个空间，每个空间是1(char)
+//	printf("%d\n", sizeof(arr2));
+//	//arr2是字符数组，字符不是以\0结尾，多少个就是多少个
+//
+//	printf("%d\n", strlen(arr1));
+//	//arr1是字符串数组,计算字符串到\0结束，所以是3
+//	printf("%d\n", strlen(arr2));
+//	//arr2是字符数组，而strlen以字符串结束，而字符数组后面没有\0，所以是个随机值
+//
+//	return 0;
+//}
+
+
+
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	char arr[] = "abcdef";
+//
+//	int i = 0;
+//
+//	int len = strlen(arr);
+//
+//	for (i = 0; i < len; i++)
+//	{   //strlen返回的是一个无符号整型(unsigned int)，所以要强制转换成int:i<(int)strlen(arr);但一般不这么写
+//		printf("%c ", arr[i]);
+//	}
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	//sizeof可以求字符串数组也可以求整型数组
+//	printf("%d\n", sz);
+//	//结果是7,因为有一个\0
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//一维数组在内存中的存储
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6 };
+//
+//	int i = 0;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("&arr[%d ] = %p\n", i, &arr[i]);
+//	}
+//
+//	return 0;
+//}
+
+//以下是输出的结果,得出的结论：
+//数组是连续存放的,根据类型分配相同大小的空间
+//下标为0就是低地址，往上就是高地址
+
+//& arr[0] = 00000051003CFBD8
+//& arr[1] = 00000051003CFBDC
+//& arr[2] = 00000051003CFBE0
+//& arr[3] = 00000051003CFBE4
+//& arr[4] = 00000051003CFBE8
+//& arr[5] = 00000051003CFBEC
+
+
+
+
+
+//二维数组的创建
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[3][4] = { {1,2,3},{4,5},{6,7,5}};
+//
+//	return 0;
+//}
+ 
+////二维数组未完全初始化，默认值也是0
+//二维数组行的下标可以省略，不能省略列
+
+
+
+
+
+
+//遍历二维数组
+//二维数组依然是通过下标来访问
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[3][4] = { {1,2,3},{4,5,6} };
+//
+//	int i = 0;
+//
+//	for (i = 0; i < 3; i++)
+//	{
+//		int j = 0;
+//		
+//		for (j = 0; j < 4; j++)
+//		{
+//			printf("%d ", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+//二维数组在内存中的存储
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[3][4] = { {1,2,3},{4,5} };
+//
+//	int i = 0;
+//
+//	for (i = 0; i < 3; i++)
+//	{
+//		int j = 0;
+//		for (j = 0; j < 4; j++)
+//		{
+//			printf("&arr[%d][%d] = %p\n", i, j, &arr[i][j]);
+//		}
+//	}
+//
+//	return 0;
+//
+//}
+
+//三行的二维数组是由三行一维数组组成的
+//多维数组是一维数组的数组
+
+//以上代码的输出结果
+
+//& arr[0][0] = 0000002DDFD2F818
+//& arr[0][1] = 0000002DDFD2F81C
+//& arr[0][2] = 0000002DDFD2F820
+//& arr[0][3] = 0000002DDFD2F824
+//& arr[1][0] = 0000002DDFD2F828
+//& arr[1][1] = 0000002DDFD2F82C
+//& arr[1][2] = 0000002DDFD2F830
+//& arr[1][3] = 0000002DDFD2F834
+//& arr[2][0] = 0000002DDFD2F838
+//& arr[2][1] = 0000002DDFD2F83C
+//& arr[2][2] = 0000002DDFD2F840
+//& arr[2][3] = 0000002DDFD2F844
+
+//结论：二维数组和一维数组在内存存储中一样，也是连续存储的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//冒泡排序
+
+//#include <stdio.h>
+//
+//void bubble_sort(int arr[], int sz) //int arr[]就是指针变量，写成int* arr一样可以
+//                                    //int* 是对某个整形取地址，int arr[]是系统默认取数组首元素地址
+//{
+//	int i = 0;
+//
+//	for (i = 0; i < sz - 1; i++)
+//	{
+//		int j = 0;
+//		int flag = 1;  //提升效率
+//
+//		for (j = 0; j < sz - 1 - i; j++)
+//		{
+//			
+//			if (arr[j] > arr[j + 1])
+//			{
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//				flag = 0;
+//			}
+//		}
+//
+//		if (flag == 1)
+//		{
+//			break;
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int arr[10] = { 9,8,6,7,3,4,5,0,2,1 };
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//
+//	bubble_sort(arr,sz);//形参是实参的一份临时拷贝，传数组的时候电脑不会这么傻把全部传过去，因为如果一个数组有一万个元素
+//                      //相当于把存储空间涨了一倍，所以为了避免空间浪费，只是传过去数组首元素的第一个地址
+//
+//	int  i = 0;
+//
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//
+//	printf("\n");
+//
+//	return 0;
+//}
+
+//10个元素就是9趟，9个元素就是8趟
+
+//第一趟排序
+//9对对比
+
+//第二趟排序，不用排最后一位，因为已经和所有数对比过，是最大了，所以跳出循环的条件是sz - 1 - i，i此时是0
+//10 - 1 - 0 = 9   ， i每一趟加1，每一趟减去已经排序好了的数
+
+//...以此类推
+
+
+
+
+
+
+//数组名
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int arr[5] = { 1,2,3,4,5 };
+//
+//	printf("%p\n", arr);
+//	printf("%p\n\n", arr + 1);
+// 
+//	printf("%p\n", &arr[0]); //数组名就是首元素的地址
+//	printf("%p\n\n", &arr[0] + 1);
+//
+//	printf("%d\n\n", *arr); //数组名解引用操作就是数组的第一个元素
+// 
+//	printf("%p\n",&arr);//这里&arr取了所有元素的地址，是连续的，后面给省略了
+//	printf("%p\n\n", &arr + 1);
+//
+//	printf("%d\n", sizeof(*arr));
+// 
+//	return 0;
+//}
+
+//数组名就是首元素的地址,但是有两种例外：
+// 1.sizeof（数组名）中的数组名是整个数组的元素的内存空间，单位是字节
+// 2.&arr,取地址时取出来的是整个数组的地址
+//除了以上两种情况，其余所有情况(arr)数组名都是首元素的地址
+
+//数组名解引用操作就是数组的第一个元素
+
+
+
+
+
+
+
+
+
+//三子棋
+
+#include <stdio.h>
+#include "add.h"
+
+void menu()
+{
+	printf("******************************\n");
+	printf("******* 1.play  2.exit *******\n");
+	printf("******************************\n");
+}
+//游戏的整个算法实现
+void game()
+{	//数组-存放走出的棋盘信息
+	char board[ROW][COL] = { 0 };
+
+	//初始化棋盘,初始化后数组里放的都是空格
+	InitBoard(board, ROW, COL);
+
+	//打印棋盘
+	DisplayBoard(board,ROW,COL);
+
+	while (1)
+	{
+		//玩家走棋
+		PlayerMove(board, ROW, COL);
+		DisplayBoard(board,ROW,COL);
+		//电脑走棋
+	}
+}
+
+void test()
+{
+	int input = 0;
+	do {
+		menu();
+		printf("请输入:>\n");
+
+		scanf("%d", &input);
+
+		switch (input)
+		{
+			case 1:
+				game();
+				break;
+			case 0:
+				printf("退出游戏\n");
+				break;
+			default:
+				printf("选择错误，重新选择\n");
+				break;
+		}
+	} while (input);
+}
+
+int main()
+{
+	test();
+
+	return 0;
+
+}
 
 
 
