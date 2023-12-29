@@ -36,19 +36,50 @@
 
 
 //三子棋   6794行
-#define ROW 3     //宏定义后面不用加分号 ;
-#define COL 3
+//#define ROW 3     //宏定义后面不用加分号 ;
+//#define COL 3
+//
+////声明
+////                       二维数组的[][]里需要加形参
+//void InitBoard(char board[ROW][COL], int row, int col);
+//
+//void DisplayBoard(char board[ROW][COL], int row, int col);
+//
+//void PlayerMove(char board[ROW][COL], int row, int col);
+//
+//void ComputerMove(char board[ROW][COL], int row, int col);
+//
+//char IsWin(char board[ROW][COL], int row, int col);
 
-//声明
-//                       二维数组的[][]里需要加形参
-void InitBoard(char board[ROW][COL], int row, int col);
-
-void DisplayBoard(char board[ROW][COL], int row, int col);
-
-void PlayerMove(char board[ROW][COL], int row, int col);
 
 
 
+
+
+
+
+
+
+//扫雷
+
+//#define ROW 9
+//#define COL 9
+//
+//#define ROWS ROW+2	//这里不用加 = 号
+//#define COLS COL+2
+//
+//#define EASY_COUNT 10;
+//
+////声明
+//
+//void InitBoard(char board[ROWS][COLS], int rows, int cols,char set);
+//
+//void DisplayBoard(char board[ROWS][COLS], int row, int col);
+////                          传过来的是mine数组是ROWS和COLS,所以只能写board[ROWS][COLS]
+//
+//void SetMine(char board[ROWS][COLS], int row, int col);
+//
+//void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col);
 
 
 
