@@ -1,4 +1,3 @@
-﻿  waibuwenjian.c
-  yayinide yongyuan bushi xing.c
-  正在生成代码...
+﻿  yayinide yongyuan bushi xing.c
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(9589,1): warning C4828: 文件包含在偏移 0x29cc6 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
   yayinideyongyunbushixing.vcxproj -> E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\Debug\yayinideyongyunbushixing.exe

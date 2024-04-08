@@ -1,2 +1,4 @@
 ﻿  yayinide yongyuan bushi xing.c
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(12199,9): warning C4013: “strcmp”未定义；假设外部返回 int
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(12208,2): warning C4013: “qsort”未定义；假设外部返回 int
   yayinideyongyunbushixing.vcxproj -> E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\x64\Debug\yayinideyongyunbushixing.exe
