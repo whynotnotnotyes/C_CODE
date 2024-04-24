@@ -1,3 +1,3 @@
 ﻿  yayinide yongyuan bushi xing.c
-E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(9589,1): warning C4828: 文件包含在偏移 0x29cc6 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(13098,9): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
   yayinideyongyunbushixing.vcxproj -> E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\Debug\yayinideyongyunbushixing.exe
