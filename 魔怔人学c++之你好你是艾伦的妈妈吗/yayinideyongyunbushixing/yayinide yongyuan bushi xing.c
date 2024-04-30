@@ -9506,7 +9506,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
-//三种方法实现strlen:1.计数器方法(6409)	2.递归的方法(6438)  3.指针减指针的方法(8737)
+//三种方法实现strlen:1.计数器方法(6409)	2.递归的方法(不创建临时变量)(6438)   3.指针减指针的方法(8844)
 
 
 
@@ -13436,7 +13436,10 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
 //结构体章节作业：
+
 
 
 //#include <stdio.h>
@@ -13448,11 +13451,12 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	float score;
 //}stu;
 
-
 //struct是结构体类型的关键字
 //struct student是用户定义的结构体类型
 //num,score都是结构体成员名
 //stu是用户定义的结构体变量名
+
+
 
 
 
@@ -13544,12 +13548,14 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //Debug被称为调试版本，程序调试找bug的版本
 //Release被称为发布版本，测试人员测试的就是Release版本
-//Debug版本包含调试信息,不做优化
+//Debug版本包含调试信息,不做优化,所以Debug的文件会比Release大
 //Release版本不可以调试
 
 
 
 //const int *p 和 int const *p等价
+
+
 
 
 
@@ -13665,6 +13671,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //#include <stdlib.h>
 //int main()
 //{
+//	int a = 10;
 //	//申请空间
 //	int* p = (int*)malloc(10 * sizeof(int));
 //	//使用空间
@@ -13696,6 +13703,11 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+//答案是C，D那里是指针数组，要看清楚，不是数组指针啊喂！！！
+
+
+
+
 
 //下面哪个是数组指针()
 //A.int** arr[10]
@@ -13723,7 +13735,12 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //B.sizeof(arr),arr表示整个数组
 //C.&arr,arr表示整个数组
 //D.除了sizeof(arr)和&arr中的数组名,其他地方出现的数组名arr，都是数组首元素的地址
+
+
+
 //答案是A
+//arr是首元素地址，&arr是取整个数组的地址
+
 
 
 
@@ -13745,7 +13762,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //题目:描述下面的代码
 
-//int(*(F*)(int,int))(int)
+//int(*(*F)(int,int))(int)
 
 //int(*F)(int,int)
 
@@ -13756,3 +13773,826 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int(*		(F*)(int,int)	)(int)
 
 //第二个代码是一个函数指针，指向的函数有两个int形参,返回类型是int
+
+
+
+
+//题目：声明一个指向含有10个元素的数组的指针，其中每个元素是一个函数指针，
+//该函数的返回值是int，参数是int*
+
+
+
+
+
+//答案:int (*(*pa)[10])(int*);
+
+
+
+//回调函数就是一个通过函数指针调用的函数
+
+//回调函数一般通过函数指针实现
+
+//回调函数一般不是函数的实现调用，而是再特定的场景下，由另外一方调用
+
+//回调函数是调用函数指针指向的那个函数
+
+
+
+//多选题
+//下面test函数声明正确的是()
+//char* arr[5] = { "hello","bit" };
+//test(arr);
+//
+//A.void test(char* arr);
+//B.void test(char** arr);
+//B.void test(char arr[5]);
+//B.void test(char* arr[5]);
+
+
+
+//答案是B,D
+//函数传的是数组，参数可以写成数组，也可以写成指针
+//写成指针就是，arr是首元素地址,首元素类型是char*,所以传过去用char**接收
+//写成数组就是char* arr[5]
+
+
+
+
+
+//下面代码中print_arr函数参数设计哪个是正确的？()
+//int arr[3][5] = { 1,2,3,4,5,6,7,8,9,10 };
+//print_arr(arr, 3, 5);
+//
+//A.void print_arr(int arr[][], int row, int col);
+//B.void print_arr(int* arr, int row, int col);
+//B.void print_arr(int (*arr)[5], int row, int col);
+//B.void print_arr(int (*arr)[3], int row, int col);
+
+
+//A不行，行和列都没有指定
+//B不行，写指针形式，传二维数组首元素地址，B却是一级指针
+//C写成数组形式是对的选C
+//D里[3]的意思是数组内有3个元素，但是数组有5个元素
+
+
+
+
+
+//编程题:
+//实现一个函数，可以左旋字符串中的k个字符
+//例如：
+//ABCD左旋一个字符得到BCDA
+//ABCD左旋两个字符得到CDAB
+//ABCD左旋三个字符得到DABC
+
+//#include <stdio.h>
+//#include <string.h>
+//#include <assert.h>
+//
+//void left_move(char arr[], int k)
+//{
+//	assert(arr);
+//
+//	int i = 0;
+//	int len = strlen(arr);
+//
+//	for (i = 0; i < k; i++)
+//	{
+//		int j = 0;
+//		char tmp = *arr;
+//		for (j = 0; j < len-1; j++)
+//		{
+//			
+//			arr[j] = arr[j]+1;
+//		}
+//		arr[len-1]= tmp;
+//	}
+//}
+//
+//int main()
+//{
+//	char arr[] = "abcdefg";	//这里一定要是arr[]而不是arr，不然就是把常量字符串放进arr里面,常量字符串不能修改
+//
+//	printf("你要右旋几个字符:>\n");
+//	int k = 0;
+//	scanf("%d", &k);
+//
+//	left_move(arr, k);
+//
+//	printf("%s\n", arr);
+//
+//	return 0;
+//
+//}
+
+
+
+
+//以上代码 函数参数用指针来写
+
+//#include <stdio.h>
+//#include <string.h>
+//#include <assert.h>
+//
+//void left_move(char arr[], int k)
+//{
+//	assert(arr != NULL);
+//
+//	int i = 0;
+//	int len = strlen(arr);
+//
+//	for (i = 0; i < k; i++)
+//	{
+//		int j = 0;
+//		char tmp = *arr;
+//		for (j = 0; j < len-1; j++)
+//		{
+//			*(arr + j) = *(arr + j + 1);
+//		}
+//		*(arr + len - 1) = tmp;
+//	}
+//}
+//
+//int main()
+//{
+//	char arr[] = "abcdefg";	//这里一定要是arr[]而不是arr，不然就是把常量字符串放进arr里面,常量字符串不能修改
+//
+//	printf("你要右旋几个字符:>\n");
+//	int k = 0;
+//	scanf("%d", &k);
+//
+//	left_move(arr, k);
+//
+//	printf("%s\n", arr);
+//
+//	return 0;
+//
+//}
+
+
+//以上办法叫做暴力求解法,还有更优的办法
+//三部翻转法
+//abcdef	翻转几个字符就切开几个字符
+//ab cdef
+//ba fedc	切开的两部分都再次进行翻转
+//cdefab	
+
+
+
+//#include <stdio.h>
+//#include <assert.h>
+//
+//void reverse(char* left,char* right)
+//{
+//	assert(left);	//只要形参是指针变量，下面都要加上assert保证其传参具有有效性
+//	assert(right);
+//
+//	while (left < right)
+//	{
+//		int tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//
+//		left++;
+//		right--;
+//
+//	}
+//}
+//
+//void left_move(char* arr, int k)
+//{
+//	assert(arr);
+//	assert(k <= 6);
+//	int len = strlen(arr);
+//	reverse(arr,arr+k-1);
+//	reverse(arr+k,arr+len-1);
+//	reverse(arr,arr+len-1);
+//}
+//
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	
+//	left_move(arr, 4);
+//
+//	printf("%s\n", arr);
+//
+//	return 0;
+//}
+
+
+
+
+
+//题目：写一个函数，判断一个字符串是否为另外一个字符串旋转之后的字符串
+//例如：给定 s1=AABCD 和s2=BCDAA,返回1
+//给定 s1=abcd 和 s2=ACBD,返回0
+
+//#include <stdio.h>
+//#include <assert.h>
+//#include <string.h>
+//
+//void reverse(char* left,char* right)
+//{
+//	assert(left);
+//	assert(right);
+//
+//	while (left < right)
+//	{
+//		int tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//
+//		left++;
+//		right--;
+//	}
+//}
+//
+//void left_move(char* arr, int k)
+//{
+//	assert(arr);
+//	assert(k <= 6);
+//	int len = strlen(arr);
+//	reverse(arr,arr+k-1);
+//	reverse(arr+k,arr+len-1);
+//	reverse(arr,arr+len-1);
+//}
+//
+//int my_assert(char* s1, char* s2)
+//{
+//	assert(s1);
+//	assert(s2);
+//
+//	int i = 0;
+//	int len = strlen(s1);
+//
+//	for (i = 0; i < len; i++)
+//	{
+//		left_move(s1, 1);	//这里为什么是1而不是i，每次调用left_move函数，s1都会改变,
+//		//因为如果是i的话，i=1，旋转一个字符，s1是ABCDA,再调用一次，i=2，s1变成了CDAAB
+//		//不符合我们想要左旋一次然后对比s2的目的
+//
+//		if (strcmp(s1,s2)==0)
+//		{
+//			return 1;
+//		}
+//	}
+//  return 0;
+//}
+//
+//int main()
+//{
+//	char s1[] = "AABCD";
+//	char s2[] = "BCDAA";
+//
+//	int i = 0;
+//
+//	int ret = my_assert(s1, s2);
+//	
+//	if (ret == 1)
+//	{
+//		printf("Yes\n");
+//	}
+//
+//	return 0;
+//}
+
+
+//设计思路：s1字符串5个字符，就左旋5次，每次左旋逐渐递增一个元素
+//如果有一次左旋s1等于s2，就说明s1和s1具有旋转关系(用strcmp比较)
+//为什么不能用s1==s2呢？因为s1,s2是数组首元素地址,两个数组的首元素地址是不可能相等的
+
+
+
+
+
+
+
+//第二种方法
+//例如：s1 = "abcdef",再加上一个"abcdef"就是"abcdefabcdef",这个字符串里包含了所有旋转的可能性
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int is_left_move(char* str1, char* str2)
+//{
+//	//这里是判断两个字符串长度是否相同,比如abc和ab,ab并不是abc的翻转,但是abc还是包含ab,会造成误判
+//	int len1 = strlen(str1);
+//	int len2 = strlen(str2);
+//	if (len1 != len2)
+//	{
+//		return 0;
+//	}
+//
+//
+//	//1.再str1字符串中追加一个str1的字符c
+//	//strncat在MSDN里的解释：char *strncat( char *strDest, const char *strSource, size_t count );
+//	//strcat在MSDN里的解释:char *strcat( char *strDestination, const char *strSource );
+//	//strncat比strcat多了个count,说明strnact是靠字符串元素个数来决定停止的
+//	strncat(str1, str1,len1);
+//
+//
+//	//2.判断str2指向的字符串是否是str1指向的字符串的子串
+//	//strstr-找子串的函数
+//	char* ret = strstr(str1, str2);	//在str1里面找有没有str2的子串,找到了返回str2的地址(字符地址)，找不到返回空指针NULL
+//
+//	if (ret == NULL)
+//	{
+//		return 0;
+//	}
+//	else
+//	{
+//		return 1;
+//	}
+//}
+//
+//int main()
+//{
+//	char arr1[30] = "abcdef";	//给30是为了有足够的空间追加一个字符串
+//	char arr2[] = "cdefab";
+//
+//	int ret = is_left_move(arr1, arr2);
+//
+//	if (ret == 1)
+//	{
+//		printf("YES\n");
+//	}
+//	else
+//	{
+//		printf("NO\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+//库函数strcat 把一个字符串追加到另外一个字符串后面,但是不能追加自己,要引<string.h>的头文件
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	char arr1[30] = "abc";		//记得这里的[]要给一个数字有足够的空间来追加
+//	char arr2[] = "def";
+//
+//	strcat(arr1, arr1);
+//
+//	printf("%s\n", arr1);
+//
+//	return 0;
+//}
+
+//strcat原理:abc\0  def\0,把d放到\0的位置,e放在\0后面的位置,f放在再后面的位置,最后把def\0的\0放到最后
+//为什么strcat不能追加自己,比如abc\0,把a放到\0位置,把b放到\0后面位置，把c放到后两个位置，此时\0已经被a给占了
+//此时字符串就没有\0了,追加就不会停止,直到遇到\0
+//自己追加自己可以用strncat
+
+
+
+
+
+
+
+
+//题目：杨氏矩阵
+//题目内容：
+//有一个数字矩阵，矩阵的每行从左到右是递增的，矩阵从上到下是递增的，
+//请编写程序在这样的矩阵中查找某个数字是否存在
+//要求：事件复杂度小于O(N);
+//矩阵(数组)的全部元素是N个，每查找一个元素需要O*N个单位时间,
+//假如要查找10，10如果是最后一个元素,遍历去找的话，找的时间就等于O(N)了
+
+
+
+//#include <stdio.h>
+//
+//int FindNum(int arr[3][3], int *row, int *col, int k)
+//{
+//	int x = 0;
+//	int y = *col - 1;
+//
+//	while (x <= (*row)-1 && y >= 0)
+//	{
+//		if (arr[x][y] > k)
+//		{
+//			y--;
+//		}
+//		else if (arr[x][y] < k)
+//		{
+//			x++;
+//		}
+//		else
+//		{
+//			*row = x;
+//			*col = y;
+//			return 1;
+//		}
+//	}
+//	return 0;
+//}
+//
+//int main()
+//{
+//	int arr[3][3] = { {1,2,3},{3,4,5},{4,5,6} };
+//
+//	int k = 5;
+//
+//	int row = 3;
+//	int col = 3;
+//
+//	int ret = FindNum(arr, &row, &col, k);	//把行和列传址过去，方便返回下标,如果在函数里printf不够简洁
+//											//当未来想要带回几个值但是一个return无法搞定的时候，可以传址
+//
+//	if (ret == 1)
+//	{
+//		printf("找到了\n");
+//		printf("下标是%d,%d", row, col);
+//	}
+//	else
+//	{
+//		printf("没找到\n");
+//	}
+//
+//	return 0;
+//}
+
+
+//设计思路：从最右上角或者最右下角元素开始查找
+//如果最右上角元素小于k,说明那一行都没有k,因为这个矩阵是左右递增的,k比那一行最大的数都大，左边肯定没有,
+//因此这一行都去掉,x++,x++后第一行就不能访问了,
+//如果最右上角元素大于k,说明那一列都没有k,因为这个矩阵是上下递增的,这一列这个数是这一列最小的，最小的数都要比k大，下面的数就没必要找了
+//因此这一列去掉，y--,y--后那一列就不能访问了
+
+//直到找到一个数，既不大于也不小于，那就是等于了，相当于找到这个数k了
+
+
+
+
+
+
+
+
+
+
+//章节：字符串函数与刨析
+
+//求字符串长度
+//strlen
+
+//长度不受限制的字符串函数
+//strcpy
+//strcat
+//strcmp
+
+//长度受限的字符串函数介绍
+//strncpy
+//strncat
+//strncmp
+
+//字符串查找
+//strstr
+//strtok
+
+//错误信息报告
+//strerror
+
+//字符操作
+
+//内存操作函数
+//memcpy
+//memmove
+//memset
+//memcmp
+
+
+//C语言中对字符和字符串的处理很是频繁，但是C语言本身是没有字符串类型的，
+//字符串通常放在 常量字符串 中或者 字符数组 中，常量字符串适用于那些对它不做修改的字符串函数
+//如果有一个字符串，那么它的末尾要有\0作为结束标志
+
+
+
+
+
+//strlen
+//strlen返回的是unsigned int(无符号整型)的
+//字符串已经把\0作为结束表i之，strlen的函数返回的是字符串中'\0'前面出现的字符个数(不包含'\0')
+//参数指向的字符串必须要以'\0'结束
+//注意函数的返回值未size_t,是无符号的
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int my_strlen(const char* arr)
+//{
+//	int count = 0;
+//	while (*arr != '\0')
+//	{
+//		return 1 + my_strlen(arr + 1);
+//	}
+//}
+//
+//int main()
+//{
+//	if (strlen("abc") - strlen("abcdef") > 0)
+//	{
+//		printf("hehe\n");
+//	}
+//	else
+//	{
+//		printf("haha\n");
+//	}
+//
+//
+//	if (my_strlen("abc") - my_strlen("abcdef") > 0)
+//	{
+//		printf("hehe\n");
+//	}
+//	else
+//	{
+//		printf("haha\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+//strlen在MSDN的定义
+//size_t strlen( const char *string );
+//size_t转到定义就是unsigned int 改名字(typedef)，
+//两个unsigned int(无符号数)相减，得到的还是无符号数，既然是无符号数，那就会大于0
+
+//为什么下面那个my_strlen会返回haha呢？因为my_strlen返回的类型是int
+
+
+
+
+
+//strcpy
+//源字符必须以'\0'结束
+//会将源字符串中的'\0'拷贝到目标空间
+//目标空间必须足够大，以确保能存放源字符串
+//目标空间必须可变
+
+
+//模拟实现strcpy
+
+
+//#include <stdio.h>
+//#include <string.h>
+//#include <assert.h>
+//
+//char*  my_strcpy(char* dest, char* src)
+//{
+//	assert(dest != NULL);
+//	assert(src != NULL);
+//
+//	char* ret = dest;
+//	//拷贝src指向的字符串到dest指向的空间，包含'\0'
+//	while (*dest++ = *src++)
+//	{
+//		;
+//	}
+//	
+//	//返回目的空间的起始地址
+//	return ret;
+//
+//}
+//
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "ABCD";
+//	//如果源地址是arr2[] = {'a','b','c'};那这样是错误的，因为源地址没有\0
+//
+//	//arr1 = arr2;   这种写法是错误的，arr1和arr2都是首元素地址
+//
+//	my_strcpy(arr1, arr2);
+//	
+//	printf("%s\n", arr1);
+//
+//	return 0;
+//}
+
+
+//源地址必须以'\0'结束				  不能是 arr[] = {'a','b','c'};
+//会将源字符串中的'\0'拷贝到目标空间
+//目标空间必须足够大,以确保能存放字符串  不能是 目的地址 arr1[] = "a"	arr2[] = "abcdef" , 会放不下
+//目标空间必须可变                     不能是 常量字符串  char arr = "abcdef"
+
+
+
+
+
+
+
+//strcat
+//源字符串必须以'\0'结束
+//目标空间必须有足够大,能容纳下源字符串的内容
+//目标空间必须可修改
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	char arr1[30] = "abcdef";
+//	//char arr1[] = "abcdef";
+//	char arr2[] = "ABCDEF";
+//	//char arr1[] = "abcdef";为什么这样写会报错,因为字符串数组是根据字符串初始化来确定arr1的大小的，
+//	//里面只能放abcdef,再追加一个会越界访问
+//	
+//	//1.如果要把源地址追加到目的地地址，目的地地址的空间要足够大
+//	//2.源地址还需要包含\0
+//
+//	strcat(arr1, arr2);
+//
+//	printf("%s\n", arr1);
+//
+//	return 0;
+//}
+
+
+
+
+//#include <stdio.h>
+//#include <string.h>
+//
+//int main()
+//{
+//	char arr1[] = "hello\0xxxxxxxx";
+//	//如果arr1是hello,看不出来\0有没有追加到后面,
+//	//hello\0xxxxxxxx,如果\0确实追加了,\0就会改成w,其中一个x会变成\0
+//
+//	//strcat 源地址和目的地都要有\0
+//
+//	char arr2[] = "world";
+//
+//	strcat(arr1, arr2);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//模拟实现strcat
+
+//#include <stdio.h>
+//#include <assert.h>
+//
+//char* my_strcat(char* dest,const char* src)	//目的地址需要改变，源地址不需要改变，所以源地址加上const
+//{
+//	assert(dest);
+//	assert(src);
+//
+//	char* ret = *dest;
+//
+//	while ((*dest) != '\0')
+//	{
+//		dest++;
+//	}
+//
+//	while (*src)
+//	{
+//		*dest = *src;
+//		dest++;
+//		src++;
+//	}
+//
+//	//while (*dest++ = *src++)
+//	//{
+//	//	;
+//	//}
+//
+//	*dest = *src;
+//
+//	return ret;
+//}
+//
+//int main()
+//{
+//	char arr1[30] = "abcdef";
+//	char arr2[] = "ABCDEF";
+//
+//	my_strcat(arr1, arr2);
+//
+//	printf("%s\n", arr1);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//strcmp
+//字符串比较函数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "as";
+//
+//	int ret = strcmp(arr1, arr2);
+//	//比较两个字符串，第一个比第二个大，返回正数，等于返回0，第一个比第二个小返回负数(不同编译器不一样,但是返回原理一样)
+//	//比较的是首个不同字符的Ascii码值
+//	//第一个字符双方都是a,相等，看不出大小，继续比第二个字符
+//	//a的ASCII值小于s,所以第一个字符串小于第二个字符串
+//
+//	if (strcmp(arr1, arr2) > 0)
+//	{
+//		printf("arr1>arr2\n\n");
+//	}
+//	else if (strcmp(arr1, arr2) == 0)
+//	{
+//		printf("arr1==arr2\n\n");
+//	}
+//	else
+//	{
+//		printf("arr1<arr2\n\n");
+//	}
+//
+//
+//	printf("%d\n", ret);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//模拟实现strcmp
+
+//#include <stdio.h>
+//#include <assert.h>
+//
+//int my_strcmp(const char* arr1,const char* arr2)  //我们只是比较，不修改，所以用const修饰
+//{
+//	assert(arr1 && arr2);
+//
+//	while (*arr1 == *arr2)
+//	{
+//		if (*arr1 == '\0')  //这一句的意思是*arr1==*arr2 并且 *arr1=='\0',那就说明此时arr2也等于'\0'，这两个字符串完全相等
+//		{
+//			return 0;
+//		}
+//		arr1++;
+//		arr2++;
+//	}
+//
+//	if (*arr1 > *arr2)
+//	{
+//		return 1;
+//	}
+//	else if (*arr1 < *arr2)
+//	{
+//		return -1;
+//	}
+//
+//	//如果不返回固定的1或者-1,可以用下面的这个return,arr1大于arr2,相减一定返回正数,arr1小于arr2,相减一定返回负数
+//	//return *arr1 - *arr2;
+//}
+//
+//int main()
+//{
+//	char arr1[] = "abcdefg";
+//	char arr2[] = "abc";
+//
+//	if (my_strcmp(arr1, arr2) > 0)
+//	{
+//		printf("arr1>arr2\n\n");
+//	}
+//	else if (my_strcmp(arr1, arr2) == 0)
+//	{
+//		printf("arr1==arr2\n\n");
+//	}
+//	else if(my_strcmp(arr1, arr2)<0)
+//	{
+//		printf("arr1<arr2\n\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
