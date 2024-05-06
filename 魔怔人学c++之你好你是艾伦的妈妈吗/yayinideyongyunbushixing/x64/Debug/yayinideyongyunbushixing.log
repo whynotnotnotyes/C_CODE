@@ -1,6 +1,11 @@
-﻿  yayinide yongyuan bushi xing.c
+﻿  waibuwenjian.c
+  yayinide yongyuan bushi xing.c
 E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(7789,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(9585,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(10986,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(12577,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(13967,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(15578,1): warning C4828: 文件包含在偏移 0x4087c 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
+E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\yayinide yongyuan bushi xing.c(15578,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  正在生成代码...
   yayinideyongyunbushixing.vcxproj -> E:\Chengxu\C++\魔怔人学c++之你好你是艾伦的妈妈吗\yayinideyongyunbushixing\x64\Debug\yayinideyongyunbushixing.exe
