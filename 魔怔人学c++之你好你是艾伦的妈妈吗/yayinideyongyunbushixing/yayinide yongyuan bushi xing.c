@@ -4319,12 +4319,11 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 //#include <stdio.h>
+//#include <string.h>
 //
 //int main()
 //{
-//	int ch = getchar();
-//
-//	printf("%s\n", ch);
+//	char ch = getchar();
 //
 //	putchar(ch);
 //
@@ -14278,9 +14277,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //strlen
 //strlen返回的是unsigned int(无符号整型)的
-//字符串已经把\0作为结束表i之，strlen的函数返回的是字符串中'\0'前面出现的字符个数(不包含'\0')
+//字符串已经把\0作为结束标志，strlen的函数返回的是字符串中'\0'前面出现的字符个数(不包含'\0')
 //参数指向的字符串必须要以'\0'结束
-//注意函数的返回值未size_t,是无符号的
+//注意函数的返回值size_t,是无符号的
 
 //#include <stdio.h>
 //#include <string.h>
@@ -14325,7 +14324,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //size_t转到定义就是unsigned int 改名字(typedef)，
 //两个unsigned int(无符号数)相减，得到的还是无符号数，既然是无符号数，那就会大于0
 
-//为什么下面那个my_strlen会返回haha呢？因为my_strlen返回的类型是int
+//为什么下面那个my_strlen会返回haha呢？因为my_strlen返回的类型是int,如果把my_strlen的返回类型改成size_t，
+//返回的就是hehe
 
 
 
@@ -14389,7 +14389,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
-//strcat
+//strcat  字符追加函数
 //源字符串必须以'\0'结束
 //目标空间必须有足够大,能容纳下源字符串的内容
 //目标空间必须可修改
@@ -14617,10 +14617,12 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
 //下面介绍受长度限制的字符串库函数
 
 
-
+//strncpy
 
 //#include <stdio.h>
 //#include <string.h>
@@ -14653,6 +14655,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //strcpy在MSDN的解释
 //char *strcpy( char *strDestination, const char *strSource );
+
+//strncpy只会拷贝源地址的所有内容到目的地址，如果目的地址的内容大于源地址，大于的那部分内容不会被strncpy改变
 
 
 
@@ -14704,7 +14708,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
-//strncat
+//strncat  字符串追加函数
+
 //MSDN里strncat的解释
 //char *strncat( char *strDest, const char *strSource, size_t count );
 
@@ -14719,28 +14724,23 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	char* ret = arr1;
 //
+//	char* tmp = arr2;
+//
 //	while (*arr1 != '\0')
 //	{
 //		arr1++;
 //	}
 //
 //	int count = 0;
-//	while (count <= k)
+//	while (k--)
 //	{
-//		if (*arr2 == '\0')
-//		{
-//			*arr1 = '\0';
-//			return 0;
-//		}
-//		else
-//		{
-//			*arr1 = *arr2;
-//		}
-//		
+//       *arr1 = *tmp;
+//
 //		arr1++;
-//		arr2++;
+//		tmp++;
 //		count++;
 //	}
+//	*arr1 = '\0';
 //
 //	return ret;
 //}
@@ -14748,12 +14748,12 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int main()
 //{
 //	char arr1[30] = "abcdef\0xxxxxxxxxxx";
-//	char arr2[] = "ABCDEF";
+//	char arr2[30] = "ABCDEF";
 //
-//	my_strncat(arr1, arr2, 10);
+//	my_strncat(arr2, arr2, 6);
 //	//strncat得把\0追加过去,当想要追加的数大于源地址大小时，后面只会补一个\0，strncpy会补全\0
 //
-//	printf("%s\n", arr1);
+//	printf("%s\n", arr2);
 //
 //	return 0;
 //}
@@ -15032,8 +15032,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 //strerror - 错误报告函数(错误信息函数)
+//MSDN：char *strerror( int errnum );
 
-//这些都是错误码 ， 每一个错误码对应一个错误信息
+//这些都是错误码 , 每一个错误码对应一个错误信息
 //0 - No error
 //1 - Operation not permitted
 //2 - No such file or directory
@@ -15041,6 +15042,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //#include <stdio.h>
 //#include <string.h>
+//#include <errno.h>
 //int main()
 //{
 //	//char* str = strerror(3);  - 这只是演示正常不这么用
@@ -15050,6 +15052,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	//errno 是一个全局的错误码的变量
 //	//当C语言的库函数在执行过程中，发生了错误,就会把对应的错误码，赋值到errno中
 //	//此时strerror再根据错误码转换成错误信息
+// 
+//  //errno需要引<errno.h>的头文件
 //
 //	printf("%s\n", str);
 //
@@ -15094,7 +15098,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //字符分类函数 
 //用字符分类函数需要引 <ctype.h>的头文件
-//常见的字符分了函数：tolower(转小写函数)  toupper(转大写函数)
+//常见的字符分类函数：tolower(转小写函数)  toupper(转大写函数)
 
 //#include <stdio.h>
 //#include <ctype.h>
@@ -15110,6 +15114,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	return 0;
 //}
+
 
 
 
@@ -15186,7 +15191,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //而是用一种通用型的指针来接收，void*
 
 //void *memcpy( void *dest, const void *src, size_t count );
-//count是要从源地址拷贝多少个字节到目的地地址的意思
+//count是要从源地址拷贝多少个字节到目的地地址的意思,类型是unsigned
 
 //#include <stdio.h>
 //
@@ -15221,7 +15226,6 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	return 0;
 //}
-
 
 
 
@@ -15345,6 +15349,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
 //模拟实现memmove
 
 //#include <stdio.h>
@@ -15380,9 +15386,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //int main()
 //{
-//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int arr[15] = { 1,2,3,4,5,6,7,8,9,10 };
 //
-//	my_memmove(arr + 2, arr, 20);
+//	my_memmove(arr + 5, arr + 7, 20);
 //
 //	int i = 0;
 //
@@ -15431,14 +15437,47 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+//模拟实现 memcmp
 
+//#include <stdio.h>
+//
+//int my_memcmp(void* p1, void* p2, size_t k)
+//{
+//	while (k--)
+//	{
+//		if (*(char*)p1 > *(char*)p2)
+//		{
+//			return 1;
+//		}
+//		else if (*(char*)p1 < *(char*)p2)
+//		{
+//			return -1;
+//		}
+//
+//		++(char*)p1;
+//		++(char*)p2;
+//	}
+//	return 0;
+//}
+//
+//int main()
+//{
+//	int arr1[] = { 1,2,3,8,5 };
+//	int arr2[] = { 1,2,3,5,6 };
+//
+//	int ret = my_memcmp(arr1, arr2, 16);
+//
+//	printf("%d\n", ret);
+//
+//	return 0;
+//}
 
 
 
 
 
 //memset - 内存设置
-//void *memset( void *dest, int c, size_t count );
+//MSDN：void *memset( void *dest, int c, size_t count );
 
 //#include <stdio.h>
 //#include <string.h>
@@ -15447,7 +15486,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	char arr[10] = "0";
 //
-//	memset(arr, '#', 10);
+//	memset(arr, '#', 9);
 //
 //	printf("%s\n", arr);
 //
@@ -15459,6 +15498,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	return 0;
 //}
+
+
+
 
 
 
@@ -15487,7 +15529,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 //结构体的声明:
-//结构是一些值的集合，这些值称为成员变量。结构的每个成员可以是不同类型的变量
+//结构体是一些值的集合，这些值称为成员变量。结构的每个成员可以是不同类型的变量
 //(联想):数组是一组相同元素类型的元素的集合
 
 //声明一个学生类型，想通过学生类型来创建学生变量(对象)
@@ -15517,7 +15559,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	//通过结构体类型创建结构体变量,由于变量放在main内部，所以是局部变量
 //	//如果想创建结构体全局变量，那就放在main外面,也就是结构体类型的最后面，分号前
-//	//也可以直接在main函数外面声明，不在struct类型上声明
+//	//或者直接在main函数外面声明，不在struct类型上声明
 //	//s1,s2,s3,s4都是结构体变量，s1和s2是结构体局部变量,s3和s4是结构体全局变量
 //
 //	struct stu s1;
@@ -15525,6 +15567,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //	return 0;
 //}
+
+
 
 
 
@@ -15545,16 +15589,16 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	int a;
 //    char c;
-//}*psa;     //在匿名结构体名前面加*，就是匿名结构体指针类型
+//}*psa;     //在匿名结构体名前面加*，就是匿名结构体类型指针
 //
 ////上面的两个结构在声明的时候省略掉了结构体标签(tag)
 //
 //int main()
 //{
-//	*psa = &sa;
+//	psa = &sa;
 //	//这种写法会报错
 //	//sa和psa是两个成员完全相同的匿名结构体,但是psa匿名结构体指针放不了sa的地址
-//	//编译器会认为这是两个完全不同的变量
+//	//原因是因为编译器会认为这是两个完全不同的变量
 //
 //	return 0;
 //}
@@ -15587,7 +15631,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //};
 //数据结构：数据在内存中存储的结构
 //链表:创建了一个int类型的数组:12345,这12345是通过链条连接起来的，1的结点包含了1以及下一个元素(也就是2)的地址
-//5的节点包含了5和\0
+//最后一个元素5的节点包含了5和\0
 //如果要创建这样一个链表节点的结构体变量，那一个节点除了包含自身之外，还要包含下一个节点的地址
 
 //struct Node
@@ -15603,6 +15647,9 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //{
 //	return 0;
 //}
+
+
+
 
 
 
@@ -15767,6 +15814,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	printf("%d\n", sizeof(S4));
 //	// 4.如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处,
 //	// 结构体的整体大小就是所有最大对齐数(含嵌套结构体的对齐数)的整数倍
+//  //char c1一个字节，struct s3 16个字节，s3里面的最大对齐数是8,8+16 = 24
+//  //24再加上8就是32
 //
 //	return 0;
 //}
@@ -15778,6 +15827,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 // 某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常
 //2.性能原因：数据结构(尤其是栈)应该尽可能地在自然边界上对齐。
 // 原因在于，为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存访问仅需要一次访问
+
 
 //总的来说：结构体的内存对齐是拿 空间 来换 时间 的做法
 
@@ -15814,7 +15864,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 //修改默认对齐数
-//#pragma这个预处理指令，可以改变我们的默认对齐数
+//#pragma pack这个预处理指令，可以改变我们的默认对齐数
 
 //#include <stdio.h>
 //
@@ -15854,6 +15904,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 //offsetof - 作用是 计算结构体成员相对于起始位置的偏移量
 //offsetof是一个宏，不是函数
+//用offsetof要引头文件<stddef.h>
 
 //在MSDN的定义：size_t offsetof( structName, memberName );
 //第一个参数是结构体类型名(不是变量名)，第二个参数是成员名,返回的是偏移量
@@ -15919,6 +15970,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //int main()
 //{
 //	struct S s;
+// 
 //	//赋值
 //	Init(&s);
 //
@@ -15931,11 +15983,109 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //	return 0;
 //}
 
-//结构体传参，要穿结构体的地址
+//结构体传参，要传结构体的地址
 
 
 
 
+
+
+
+
+
+
+//位段
+//位段的声明和结构体是类似的，有两个不同:
+//1.位段的成员必须是int , unsigned int 或 signed int (其实char也可以)
+//2.位段的成员名后边有一个冒号和一个数字
+
+
+//位段的位是二进制位
+//1.位段的成员可以说int ,unsigned int,signed int或者是char(属于整型家族)类型
+//2.位段的空间上是按照需要以4个字节(int)或者1个字节(char)的方式来开辟的
+//3.位段涉及很多不确定因素,位段是不跨平台的，注重可移植的程序应该避免使用位段
+//4.定义位段不能大于32
+ 
+
+//#include <stdio.h>
+//
+//struct s
+//{
+//	int a : 2;   //意思是这个int变量最多只用两个比特,节省空间，如果这个变量最多只需要两个比特，那就不需要32个比特了
+//	int b : 5;	 //意思是这个int变量最多只用5个比特
+//	int c : 10;
+//	int d : 30;
+//};
+//
+//int main()
+//{
+//	struct s s1;
+//	printf("%d\n", sizeof(s1));
+//
+//	return 0; 
+//}
+
+//为什么sizeof(s1)是8个字节？位段是这样分配的
+//位段的成员都是一样的，int分配4个字节先，也就是8个比特，2个比特加上5个比特加上10个比特等于17个比特
+//剩下15个比特，放不下最后30个比特，那这15个比特就全部作废，另外再申请一个int类型的内存，也就是4个字节
+//加上上面4个字节就是8个字节
+//即使把这15个字节给放进第一个四字节里，还是剩下15个比特,还是得开辟一块空间，但是编译器选择浪费这15个比特重新开辟一块空间存放
+
+//正常创建4个int变量需要16个字节，现在只需要8个字节，位段的存在就是为了节省空间
+
+
+
+
+
+//#include <stdio.h>
+//
+//struct S
+//{
+//	char a : 3;
+//	char b : 4;
+//	char c : 5;
+//	char d : 4;
+//};
+//
+//int main()
+//{
+//	struct S s = { 0 };
+//
+//	s.a = 10;
+//	s.b = 12;
+//	s.c = 3;
+//	s.d = 4;
+//
+//	return 0;
+//}
+
+//上面代码会先开辟一块char，8个比特,a占3比特,b占4比特,剩下一个字节不够放，再开辟一块空间，c占5个比特,
+//剩下的不够放d,再开辟一块char空间,总共3块char空间
+//00000000 00000000 00000000
+//10的二进制为1010  12的二进制为1100  3的二进制为011   4的二进制为100
+//因为a只开辟了3个比特，所以只能截断存放，存放010，所有存进去就是：
+//01100010
+//c开辟了5个比特，但是c只有三位数，就会用0补齐
+//00000011
+//第三个字节是00000100 
+//全貌就是:01100010 00000011 00000100
+//再内存中是16进制存储的,每四个比特一个16进制数
+//0110 0010 0000 0011 0000 0100 (从每一块内存右边往左读)
+//内存中就是0x620304
+
+
+
+
+
+//位段的跨平台问题
+//1.int位段被当成有符号数是不确定的(最高位是有符号位还是无符号位在C语言里是不确定的)
+//2.位段中最大的数目不能确定(16位系统最大16,32位系统最大32,写成27，在16位机器会出问题)
+//3.位段中的成员在内存中从左向右分配还是从右向左分配尚未定义
+//4.当一个结构包含两个位段，第二个位段成员比较大，无码容纳与第一个位段剩余的位时，
+//舍弃剩余的位还是利用，这是不确定的
+
+//总结：跟结构体相比，位段可以达到同样的效果，可以很好的节省空间，但是有跨平台的问题存在
+//如果一个代码注重可移植性，应该避免使用位段
 
 
 
@@ -15947,12 +16097,272 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 //枚举：
+//枚举顾名思义就是一一列举，把可能的值一一列举
+
+//枚举的大小都是4个字节(位段也是)
+
 //枚举类型的定义
+
+//枚举类型
+//#include <stdio.h>
+//
+//enum Sex
+//{
+//	MALE,	//枚举类型成员用逗号,隔开
+//	FEMALE,
+//	SECRET  //最后一个成员不需要逗号
+//};
+//
+//enum Color
+//{
+//	red = 2, //枚举变量的值是可以修改的
+//	yellow = 4,
+//	blue = 8,
+//	green    //成员如果没有修改默认值，成员的值是上一个成员的值+1
+//	//枚举常量是常量，赋值不是改变值，只是赋一个初始值，赋完值之后就不能改了,因为是常量
+//};
+//
+//int main()
+//{
+//	enum Sex s = MALE;  //enum Sex只能赋枚举类型的值，也就是说只能用MALE,FEMALE,SECRET  
+//	s = FEMALE;
+//
+//	printf("%d %d %d\n", MALE, FEMALE, SECRET); //打印出来的是默认值
+//
+//	printf("%d %d %d %d\n", red, yellow, blue,green);//打印修改默认值后的枚举变量
+//
+//
+//	enum Color s1 = 5;   //这样赋值可以通过但是有问题，因为5是int类型,s1是enum Color类型,类型不兼容
+//	//所以这里不建议这样赋值
+//
+//	printf("%d %d %d %d\n", red, yellow, blue, green);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
 //枚举的优点
-//枚举的使用
+//1.增加代码的可读性和可维护性
+//2.和#define定义的标识符比较枚举有类型检查,更加严谨，#define和enum的区别是#define定义的red没有类型，
+// 只是一个符号,但是enum Color的red有类型，那就是枚举类型
+//3.防止命名污染(封装)
+//4.便于调试
+//5.使用方便，一次可以定义多个常量
+
+//enum和#define相比
+
+//#include <stdio.h>
+//
+//#define red 1
+//#define yellow 4
+//#define blue 6
+//
+//enum Color
+//{
+//	red,
+//	yellow,
+//	blue
+//};
+////C语言运行过程:C语言的源代码-预编译-编译-链接-可执行程序
+////#define和enum的区别是#define定义的red没有类型，只是一个符号,但是enum Color的red有类型，那就是枚举类型
+//
+//int main()
+//{
+//	return 0;
+//}
+
+
+//枚举的大小
+
+//#include <stdio.h>
+//
+//enum Sex
+//{
+//	MALE,
+//	FEMALE,
+//	SECRET
+//}s1;
+//
+//int main()
+//{
+//	enum Sex s = MALE; //这里赋值只能赋值枚举里的成员，枚举里的成员又是int类型,打印sizoef就是4个字节
+//
+//	printf("%d\n", sizeof(s));
+//	printf("%d\n", sizeof(s1));
+//
+//	return 0;
+//}
+
+
+
+
 
 
 //联合
+//联合也叫联合体，共用体
+
 //联合类型的定义
-//联合的特点
+//联合也是一种特殊的自定义类型，这种类型定义的变量也包含一系列的成员，
+// 特征是这些成员共用同一块空间(所以也叫共用体)
+
+//#include <stdio.h>
+//
+//union S
+//{
+//	char c;
+//	int i;
+//	double b;
+//	double o;
+//};
+//
+//int main()
+//{
+//	union S s;
+//
+//	printf("%d\n\n", sizeof(s));
+//
+//	printf("%p\n", &s);
+//
+//	printf("%p\n", &(s.c));
+//	printf("%p\n", &(s.i));
+//
+//	s.i = 0x55;
+//
+//	printf("%p\n", &(s.i));
+//	printf("%p\n", &(s.c));
+//
+//	return 0;
+//}
+
+//联合体的特点
+//联合体的成员是共用同一块内存空间的，这样一个联合变量的大小,至少是最大成员的大小
+//因为联合至少得有能力保存最大的那个成员
+
+//这些成员不能同时使用,改变一个成员，另外的也会改变
+
+
+
+
+
+
+//判断机器大小字节序
+
+
+//方法1：指针访问
+
+//1的1616进制是0x00 00 00 01
+//低地址------------------高地址
+//小端存储就是: 0x01 00 00 00
+//大端存储就是: 0x00 00 00 01
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = 1;   //0x00 00 00 01 访问是从右到左(有待商榷)
+//
+//	
+//	if (*(char*)&a==1)
+//	{
+//		printf("小端存储\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+//方法2：联合体的方式求解
+
+//#include <stdio.h>
+//
+//int check_sys()
+//{
+//	union un
+//	{
+//		char c;
+//		int i;
+//	}u;
+//
+//	u.i = 1;
+//
+//	if (u.c == 1)
+//	{
+//		return 1;
+//	}
+//	//联合体是空间重叠的，给i赋值1，然后看c的值是多少,如果i是小端存储，那就是0x01000000,大端就是0x00000001
+//	//小端c里面放的就是1,大端c里面放的就是0
+//}
+//
+//int main()
+//{
+//	int ret = check_sys();
+//
+//	if (ret == 1)
+//	{
+//		printf("小端存储\n");
+//	}
+//	else
+//	{
+//		printf("大端存储\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+//虽然是共用一块内存，但是成员大小是不一样的
+//比如0x11223344,存到联合体里面就是0x44332211(小端)
+//char c里面只会存储一个字节，就是44，i是int类型的就会存储44332211
+//所以改变联合体的一个成员，其他成员也会跟着变
+//union un
+//{
+//	char c;
+//	int i;
+//};
+
+
+
+
+
+
+
+
 //联合大小的计算
+
+//1.联合的大小至少是最大成员的大小
+//2.当最大成员大小不是最大对齐数的整数倍的时候，就要对齐到最大对齐数的整数倍
+
+//#include <stdio.h>
+//
+//union un
+//{
+//	char arr[5]; //数组的元素类型是什么，就拿这个类型大小来算对齐数,arr类型是char,大小是1，跟默认对齐数8比，较小，1就是对齐数
+//	//写了arr[5],相当于写了5个char:char c1,char c2,char c3,char c4,char c5
+//	int i;  //默认对齐数8，i大小是4,4较小，4就是默认对齐数
+//
+//  //char arr[5]总共5个字节,这个联合体(共用体)至少5个字节，但是联合体大小必须是联合体最大对齐数的整数倍，
+//  //最大对齐数是4，5不是4的整数倍，那就补齐到4的整数倍，那就是8
+//
+//};
+//
+//int main()
+//{
+//	union un u;
+//
+//	printf("%d\n", sizeof(u));
+//
+//	return 0;
+//}
+
+
+//结构体存在对齐，联合体存在对齐,位段不存在对齐，因为要节省空间,枚举也没有对齐
+
+
