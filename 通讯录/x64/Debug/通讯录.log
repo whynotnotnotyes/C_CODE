@@ -1,0 +1,3 @@
+﻿  contact.c
+E:\Chengxu\C++\通讯录\contact.c(104,33): warning C4028: 形参 1 与声明不同
+  通讯录.vcxproj -> E:\Chengxu\C++\通讯录\x64\Debug\通讯录.exe
