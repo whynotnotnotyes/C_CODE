@@ -89,9 +89,14 @@
 
 
 
-//通讯录
+//通讯录(动态，文件版)
 
-//#define MAX 1000
+
+//#define _CRT_SECURE_NO_WARNINGS 1
+//
+////#define MAX 1000
+//
+//#define DEFAULT_sz 3
 //
 //#define MAX_NAME 20
 //#define MAX_SEX 5
@@ -100,6 +105,7 @@
 //
 //#include <stdio.h>
 //#include <string.h>
+//#include <stdlib.h>
 //
 ////这个结构体是全局变量，全局变量的生命周期是整个工程
 ////但是要用这个结构体，要引这个头文件
@@ -112,25 +118,27 @@
 //	SEARCH,
 //	MODIFY,
 //	SHOW,
-//	SORT
+//	SORT,
+//	SAVE
 //};
 //
-//struct PeoInfo
+//typedef struct PeoInfo
 //{
 //	char name[MAX_NAME];
 //	int age;
 //	char sex[MAX_SEX];
 //	char tele[MAX_TELE];
 //	char addr[MAX_ADDR];
-//};
+//}PeoInfo;
 //
 //
 ////通讯录类型
-//struct Contact
+//typedef struct Contact
 //{
-//	struct PeoInfo data[MAX]; //存放一个信息
+//	struct PeoInfo* data; //存放一个信息
 //	int size; //记录当前已经有的元素个数
-//};
+//	int capacity; //当前通讯录的最大容量
+//}Contact;
 //
 //
 ////函数声明在.h文件里
@@ -144,13 +152,25 @@
 //void ShowContact(const struct Contact* ps);
 //
 ////删除指定的联系人
-//void DelContact(struct Const* ps);
+//void DelContact(struct Contact* ps);
 //
 ////查找联系人
 //void SearchContact(const struct Contact* ps);
 //
 ////修改指定联系人
 //void ModifyContact(struct Contact* ps);
+//
+////销毁通讯录
+//void DestroyContact(struct Contact* ps);
+//
+////保存通讯录
+//void SaveContact(struct Contact* ps);
+//
+////加载文件中的信息到通讯录
+//void LoadContact(struct Contact* ps);
+
+
+
 
 
 

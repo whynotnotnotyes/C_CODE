@@ -467,8 +467,7 @@ static int APP(int a, int b)
 
 
 
-
-//通讯录
+//通讯录(动态，文件版)
 
 
 //Contact 通讯录实现
@@ -492,38 +491,93 @@ static int APP(int a, int b)
 
 //#include "add.h"
 //#include <string.h>
+//#include <errno.h>
 //
 ////函数实现在.c里面实现
+//
+//
+//
 //void InitContact(struct Contact* ps)
 //{
-//	memset(ps->data, 0, sizeof(ps->data));
-//	ps->size = 0; //设置通讯录最初只有0个元素
+//	ps->data = (struct PeoInfo*)malloc(3 * sizeof(struct PeoInfo));
+//	if (ps->data == NULL)
+//	{
+//		return;
+//	}
+//	ps->size = 0;
+//	ps->capacity = DEFAULT_sz;
+//
+//	//把文件中已经存放的通讯录中的信息加载到通讯录中
+//	LoadContact(ps);
 //}
 //
+//void CheckCapacity(struct Contact* ps);
 //
+//void LoadContact(struct Contact* ps)
+//{
+//	PeoInfo tmp = { 0 };
+//
+//	FILE* pfRead = fopen("contact.dat", "rb");
+//
+//	if (pfRead == NULL)
+//	{
+//		printf("LoadContact::%s\n", strerror(errno));
+//		return;
+//	}
+//
+//	//读取文件，放到通讯录中
+//	while (fread(&tmp, sizeof(PeoInfo), 1, pfRead))
+//	{
+//		CheckCapacity(ps);
+//		ps->data[ps->size] = tmp;
+//		ps->size++;
+//	}
+//
+//	fclose(pfRead);
+//	pfRead = NULL;
+//}
+//
+//void CheckCapacity(struct Contact* ps)
+//{
+//	//扩容
+//	if (ps->capacity == ps->size)
+//	{
+//		struct PeoInfo* ptr = realloc(ps->data, (ps->capacity + 2) * sizeof(struct PeoInfo));
+//		if (ptr != NULL)
+//		{
+//			ps->data = ptr;
+//			ps->capacity += 2;
+//			printf("扩容成功\n");
+//		}
+//		else
+//		{
+//			printf("扩容失败\n");
+//		}
+//	}
+//}
 //
 //void AddContact(struct Contact* ps)
 //{
-//	if (ps->size == MAX) //这里设置一个单独的MAX的好处就体现出来了，改一个MAX,全部MAX都会跟着改
-//	{
-//		printf("通讯录已满,无法增加\n");
-//	}
-//	else
-//	{
-//		printf("请输入名字:>");
-//		scanf("%s", ps->data[ps->size].name);
-//		printf("请输入年龄:>");
-//		scanf("%d", &(ps->data[ps->size].age));
-//		printf("请输入性别:>");
-//		scanf("%s", ps->data[ps->size].sex);
-//		printf("请输入电话:>");
-//		scanf("%s", ps->data[ps->size].tele);
-//		printf("请输入地址:>");
-//		scanf("%s", ps->data[ps->size].addr);
+//	//检测当前通讯录的容量
+//	//1.如果满了，就增加空间
+//	//2.如果不满，啥事不干
+//	CheckCapacity(ps);
 //
-//		ps->size++;
-//		printf("添加成功\n\n\n");
-//	}
+//	//增加数据
+//	printf("请输入名字:>");
+//	scanf("%s", ps->data[ps->size].name);
+//	printf("请输入年龄:>");
+//	scanf("%d", &(ps->data[ps->size].age));
+//	printf("请输入性别:>");
+//	scanf("%s", ps->data[ps->size].sex);
+//	printf("请输入电话:>");
+//	scanf("%s", ps->data[ps->size].tele);
+//	printf("请输入地址:>");
+//	scanf("%s", ps->data[ps->size].addr);
+//
+//	ps->size++;
+//	printf("添加成功\n\n\n");
+//
 //
 //}
 //
@@ -579,7 +633,8 @@ static int APP(int a, int b)
 //	scanf("%s", name);
 //
 //	//1.查找要删除的人在什么位置
-//	int pos = FindByName(ps, name);
+//	int pos = 0;
+//	pos = FindByName(ps, name);
 //	//找到了返回名字所在元素的下标
 //	//没找到返回-1
 //
@@ -609,7 +664,7 @@ static int APP(int a, int b)
 //	char name[MAX_NAME];
 //
 //	printf("请输入你要查找的名字:>\n");
-//	scanf("%s", &name);
+//	scanf("%s", name);
 //
 //	int pos = FindByName(ps, name);
 //
@@ -662,6 +717,36 @@ static int APP(int a, int b)
 //		printf("请输入要修改的地址:>");
 //		scanf("%s", ps->data[pos].addr);
 //	}
+//}
+//
+//
+//
+//void DestroyContact(struct Contact* ps)
+//{
+//	free(ps->data);
+//	ps->data = NULL;
+//}
+//
+//
+//
+//void SaveContact(Contact* ps)
+//{
+//	FILE* pfWrite = fopen("contact.dat", "wb");
+//
+//	if (pfWrite == NULL)
+//	{
+//		printf("SaveContact::%s\n", strerror(errno));
+//		return;
+//	}
+//
+//	int i = 0;
+//	for (i = 0; i < ps->size; i++)
+//	{
+//		fwrite(&(ps->data[i]), sizeof(PeoInfo), 1, pfWrite);
+//	}
+//
+//	fclose(pfWrite);
+//	pfWrite = NULL;
 //}
 
 

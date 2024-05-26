@@ -17601,6 +17601,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 // fputc   c就是char的意思
 
+//MSDN：int fputc(int c, FILE* stream);
+
 //写文件 - 一次写一个字符
 
 //#include <stdio.h>
@@ -17642,7 +17644,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //字符输入函数
 
 //读文件 - fgetc 一次读一个字符
-//MSDN：char *fgets( char *string, int n, FILE *stream );
+//MSDN：int fgetc( FILE *stream );
 
 //#include <stdio.h>
 //#include <errno.h>
@@ -17927,5 +17929,800 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //fscanf/fprintf 是针对所有输入流/所有输出流的 格式化输入/输出语句
 
 //sfcanf/fprintf其实是包含了scanf/printf的功能的
+
+
+//sscanf是从字符串中读取格式化的数据
+//sprintf是把格式化数据输出成(存储到)字符串
+
+//#include <stdio.h>
+//
+//struct S
+//{
+//	int n;
+//	float score;
+//	char arr[20];
+//};
+//
+//int main()
+//{
+//	struct S s = { 100,3.14f,"abcdef" };
+//	struct S tmp = { 0 };
+//	char buf[1024] = { 0 };
+//
+//	//把格式化的数据转换成字符串存储到buf
+//	sprintf(buf, "%d %f %s", s.n, s.score, s.arr);
+//
+//	//printf("%s\n",buf);
+//	//从buf中读取格式化数据到tmp中
+//	sscanf(buf, "%d %f %s", &(tmp.n), &(tmp.score), &tmp.arr);
+//
+//	printf("%d %f %s\n", tmp.n, tmp.score, tmp.arr);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//二进制输入输出函数  fread/fwrite 
+//适用于文件流
+
+//fwrite - 二进制输出文件
+//MSDN：size_t fwrite( const void *buffer, size_t size, size_t count, FILE *stream );
+
+//#include <stdio.h>
+//
+//struct S 
+//{
+//	char name[1024];
+//	int age;
+//	float score;
+//};
+//
+//#include <stdio.h>
+//
+//int main()
+//{
+//	struct S s = { "张三",20,55.6 };
+//
+//	struct S tmp = { 0 };
+//
+//	FILE* pf = fopen("test.txt", "wb");
+//	
+//	if (pf == NULL)
+//	{
+//		return 0;
+//	}
+//
+//	//二进制的形式写文件
+//	fwrite(&s, sizeof(struct S), 1, pf);
+//
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+
+//fread - 二进制输入文件
+//MSDN：size_t fread( void *buffer, size_t size, size_t count, FILE *stream );
+//从stream里读count个大小为size的数据最后放到buffer里面去
+
+//#include <stdio.h>
+//
+//struct S
+//{
+//	char name[20];
+//	int age;
+//	double score;
+//};
+//
+//int main()
+//{
+//	struct S tmp = {0};
+//
+//	FILE* pf = fopen("test.txt", "rb");
+//
+//	if (pf == NULL)
+//	{
+//		return 0;
+//	}
+//
+//	fread(&tmp, sizeof(struct S), 1, pf);
+//
+//	printf("%s %d %lf\n", tmp.name, tmp.age, tmp.score);
+//
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+
+
+//通讯录(动态，文件版)
+
+//#include <stdio.h>
+//#include "add.h"
+//
+//void menu()
+//{
+//	printf("****************************************\n");
+//	printf("**********1.add      2.del    **********\n");
+//	printf("**********3.search   4.modify **********\n");
+//	printf("**********5.show     6.sort   **********\n");
+//	printf("**********7.save     0.exit   **********\n");
+//	printf("****************************************\n");
+//}
+//
+//int main()
+//{
+//	int input = 0;
+//
+//
+//	//创建通讯录
+//	struct Contact con;
+//	//con就是通讯录，里边包含了1000的元素的数和size
+//
+//
+//	//初始化通讯录
+//	InitContact(&con);
+//
+//	do
+//	{
+//		menu();
+//
+//		printf("请选择:>\n");
+//		scanf("%d", &input);
+//
+//		switch (input)
+//		{
+//		case ADD:
+//			AddContact(&con);
+//			break;
+//		case DEL:
+//			DelContact(&con);
+//			break;
+//		case SEARCH:
+//			SearchContact(&con);
+//			break;
+//		case MODIFY:
+//			ModifyContact(&con);
+//			break;
+//		case SHOW:
+//			ShowContact(&con);
+//			break;
+//		case SORT:
+//			break;
+//		case EXIT:
+//			//销毁通讯录
+//			SaveContact(&con); //退出前保存
+//			DestroyContact(&con);
+//			printf("退出通讯录\n");
+//			break;
+//		case SAVE:
+//			SaveContact(&con);
+//			break;
+//		default:
+//			printf("选择错误\n");
+//			break;
+//		}
+//	} while (input);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+//文件的随机读写
+
+//fseek 
+
+//移动文件指针到指定的位置
+//根据文件指针的位置和偏移量来定位文件指针
+//MSDN：int fseek( FILE *stream, long offset, int origin );
+//stream - 要操作的文件
+//offset - 偏移量   偏移量为2，起始指针向右移动两个位置，偏移量为-2，起始指针向左移动两个位置
+//origin - 文件指针当前位置,有三个选项：SEEK_CUR(文件当前位置) SEEK_END(文件的末尾位置) SEEK_SET(文件的起始位置)
+
+//文件打开指针默认指向第一位，如果想要访问其他地方，就可以用fseek
+
+
+//#include <stdio.h>
+//#include <errno.h>
+//
+//int main()
+//{
+//	//做这个实验时test.txt里应该放的是"abcdef";
+//	FILE* pf = fopen("test.txt", "r");
+//
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//
+//	//打开文件成功第一步定位文件指针
+//	//1.定位文件指针
+//	fseek(pf, 2, SEEK_CUR);
+//	//SEEK_CUR(文件当前位置)
+//	//SEEK_END(文件的末尾位置) 例子是abcdef,末尾位置是在f的后面，如果要偏移到e，就需要写-2
+//	//SEEK_SET(文件的起始位置) 
+//
+//	//2.读取文件
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch);
+//
+//
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0; 
+//}
+
+
+
+
+
+
+
+//ftell
+//返回文件指针相对于起始位置的偏移量
+//MSDN：long ftell( FILE *stream );
+
+//rewind
+//MSDN：long ftell( FILE *stream );
+//让文件指针的位置回到文件的起始位置
+
+
+//#include <stdio.h>
+//#include <errno.h>
+//
+//int main()
+//{
+//	//这个实验需要把test.txt里内容设置为abcdef
+//	FILE* pf = fopen("test.txt", "r");
+//
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//
+//	//1.定位文件指针
+//	fseek(pf, -2, SEEK_END);
+//
+//	int ret = ftell(pf);
+//	printf("%d\n", ret);
+//
+//	fgetc(pf);
+//	int pos = ftell(pf);  //ftell:返回文件指针相对于起始位置的偏移量
+//	printf("%d\n", pos);
+//	//当fgetc的时候，就会读取一个，每读一次文件指针向后偏移一个
+//
+//	char ch = 0;
+//	rewind(pf);  //rewind:让文件指针的位置回到文件的起始位置
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);
+//
+//	//释放空间
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+
+
+//perror
+//错误码信息函数
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	FILE* pf = fopen("test222.txt", "r");
+//
+//	if (pf == NULL)
+//	{
+//		perror("Open test222.txt");
+//		//perror跟strerror作用一样，都是打印错误信息，但是perror不用引头文件，也不用errno接收错误码
+//		//perror的作用范围还比strerror要广，perror可以自定义输出，并且会在后面添加冒号和空格,可以替代strerror
+//		return 0;
+//	}
+//
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//feof - 文件结束判定
+
+//在文件读取过程中，不能用feof函数的返回值直接用来判断文件的是否结束。
+//而是应用于当文件读取结束的时候，判断是读取失败结束，还是遇到文件尾结束。
+
+//1.文本文件读取是否结束，判断返回值是否为EOF(fgetc),或者NULL(fgets)
+//例如：
+//		fgetc判断是否为EOF
+//		fgets判断返回值是否为NULL
+
+//2.二进制文件的读取结束判断，判断返回值是否小于实际要读的个数
+//例如：
+//		fread判断返回值是否小于实际要读的个数
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");
+//
+//	if (pf == NULL)
+//	{
+//		perror("open file test2.txt");
+//		return 0;
+//	}
+//
+//	//读文件
+//	int ch = 0;
+//	while ((ch = fgetc(pf)) != EOF)
+//	{
+//		putchar(ch);
+//	}
+//
+//	//文件结束后，找结束的原因，是因为文件运行正常结束，还是遇到错误结束的
+//	if (ferror(pf))
+//	{
+//		printf("error\n");
+//	}
+//	else if (feof(pf))
+//	{
+//		printf("end of file\n");
+//	}
+//	//ferror遇到文件结束或文件读取错误都会返回真，再用feof进一步判断是正常结束还是遇到了读取错误
+//	//ferror返回值为0，表示没有出错，非零为错
+//
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//最后一章节！：程序环境和C语言预处理
+
+//本章重点：
+//程序的翻译环境
+//程序的执行环境
+//详解：C语言程序的编译+链接
+//预定义符号介绍
+//预处理指定#define
+//宏和函数的对比
+//预处理操作符#和##的介绍
+//命令定义
+//预处理指令#include
+//预处理指令#undef
+//条件编译
+
+
+
+
+//程序的翻译环境和执行环境
+
+//程序有两个环境：一个叫翻译环境一个叫执行环境
+//在ANSIC的任意一种实现中，存在两个不同的环境
+//第一种是翻译环境，在这个环境中源代码被转换为可执行的机器指令。 .c----->.exe
+//第二种是执行环境，它用于实际执行代码
+
+
+//C代码(文本文件)   编译   链接       二进制的信息（二进制文件）       运行
+//test.c--------------------------->test.exe-------------------------->
+//源文件(源程序)      (翻译环境)                           (运行环境)
+
+
+
+//每一个源文件都会经过编译器单独进行处理，比如test.c和add.c这两个源文件会单独进行处理
+//通过编译器处理后会分别生成目标文件.obj
+//所有的目标文件通过链接器处理，再加上链接库，就会生成可执行程序
+//编译器处理编译，链接器处理链接
+//链接器同时也会引入标准C函数库中任何被该程序所用到的函数，而且它可以搜索程序员个人的程序库，
+//将其需要的函数也链接到程序中
+
+
+//编译再细分就有三个阶段：1.预编译(预处理)  2.编译  3.汇编
+       
+//预编译把test.c翻译成test.i
+//预编译里面有三个操作：1.头文件的包含(#include)   2.注释删除(注释会用空格替换)  3.#define替换
+//预编译里的操作都是文本操作
+
+
+//编译把test.i(C代码)翻译成test.s,也就是翻译成汇编代码
+
+//汇编把test.s翻译成test.o(就是.obj目标文件),
+//也就是把汇编代码转换成了二进制指令
+
+//在汇编阶段会形成各自文件的符号表，符号表里有符号和地址
+
+//目标文件经过链接器链接，最终生成可执行文件.exe
+
+//链接会做的两件事：1.合并段表  2.符号表的合并和重定位
+
+//链接期间要进行合并段表和符号表的合并和重定位，如果出问题就会出现链接错误问题
+
+//调试代码的时候调试的是.exe文件
+
+
+//预编译(预处理)详解
+
+
+//预定义符号
+//预定义符号不是自己定义的，而是语言内置的
+//#define不是预定义符号
+
+
+//__FILE__		//进行编译的源文件
+//__LINE__		//文件当前的行号
+//__DATE__		//文件被编译的日期
+//__TIME__		//文件被编译的时间
+//__STDC__		//如果编译器遵循ANSI C，其值为1，否则未定义
+//__FUNCTION__	//获取函数名
+
+//预定义符号远不止以上这些
+
+
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	printf("%s\n", __FILE__);	//打印出来是文件的绝对路径
+//	printf("%d\n", __LINE__);
+//	printf("%s\n", __DATE__);
+//	printf("%s\n", __TIME__);
+//	printf("\n\n");
+//
+//	//可以用来写日志
+//
+//	int arr[10] = { 0 };
+//	FILE* pf = fopen("text.txt", "w");
+//
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		arr[i] = i;
+//		fprintf(pf, "file:%s line:%d date:%s time:%s i:%d \n",
+//			__FILE__, __LINE__, __DATE__, __TIME__, i);
+//	}
+//
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//
+//
+//	return 0;
+//}
+ 
+
+
+
+
+
+
+//预处理指令 - #开头的都叫预处理指令
+
+//#define
+//#undef
+//#include
+//#pragma pack(4)
+//#pragma pack()
+//#if
+//#endif
+//#ifdef
+//#line
+
+
+
+//#define - 定义标识符
+
+//#define后面不要加分号;
+
+//#include <stdio.h>
+//
+//#define MAX 100
+//#define STR "haha"	 //#define还可以定义字符串
+//#define reg register //#define还可以定义符号
+//#define do_forever for(;;)	//#define还可以定义代码
+//
+//int main()
+//{
+//	//在预编译的时候就会把max给替换成MAX的值
+//	int max = MAX;
+//
+//	printf("%d\n", max);
+//
+//	printf("%s\n", STR);
+//
+//	reg int a = 10;
+//	//相当于register int a = 10;
+//
+//	do_forever;
+//
+//	//do_forever  //这样写就会直接结束不会循环
+//	//因为for(;;) 相当于
+//	// for(;;)
+//	//{
+//	//	return 0;
+//	//}
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//#define - 定义宏
+
+//#define机制包括了一个规定，允许把参数替换到文本中，
+//这种实现通常称为宏(macro)或者定义宏(define macro)
+
+//下面是宏的申明方式：
+//#define name(parament-list)stuff ,其中的parament-list是一个由逗号隔开的符号表，
+//它们可能出现在stuff中。
+//注意：参数列表的左括号必须与name紧邻。
+//如果两者之间有任何空白存在，参数列表就会被解释为stuff的一部分
+
+
+//#include <stdio.h>
+//
+//#define SQUARE(x) x*x
+//#define TWICE(a) a+a
+//
+//int main()
+//{
+//	//演示：SQUARE
+//
+//	int ret = SQUARE(5);  //SQUARE(5) == 5*5
+//
+//	printf("%d\n", ret);
+//
+//
+//	//有一个小问题
+//	ret = SQUARE(5 + 1); 
+//	printf("%d\n", ret);
+//	//如果我想计算6的平方，那结果应该是36，但是结果却是11？
+//	//因为宏定义不是传参，而是直接替换，实际过程应该是5+1 * 5+1 = 5+5+1=11
+//	//因为替换改变了原来想法的运算顺序，那解决办法就是把SQUARE(x) x*x 改成 SQUARE(x) (x)*(x)
+//
+//
+//
+//
+//	//演示：ADD
+//	ret = 10 * TWICE(5);
+//	printf("%d\n", ret);
+//	//结果是55，因为宏定义会替换,实际运算过程就是10*5+5
+//	//如果宏改成TWICE(x) (x)+(x)  ,结果依然是55，
+//	//把宏改成TWICE(X) ((x)+(x))  ,这样才是想要的结果
+//	//写宏定义的时候不用吝啬使用括号
+//
+//
+//	return 0;
+//}
+
+//以后简单的函数都可以用宏定义来实现了
+
+
+
+//1.宏定义不能实现递归
+//2.宏不会替换字符串里的内容  比如printf("MAX = %d");  里面的MAX不会被替换
+//3.宏不会替换宏参数前带#的宏参数
+
+
+
+
+
+//在宏定义中插入字符串
+
+//#include <stdio.h>
+//
+//#define print(x) printf("the value of "#x" is %d\n",x)
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//
+//	print(a);  //等于printf("the value of "a" is 10\n");
+//	print(b);  //等于printf("the value of "b" is 20\n");
+//
+//	//宏参数前面出现#号是不会替换的，而是转换成对应的字符串
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//带副作用的宏参数
+
+//当宏参数在宏的定义中出现超过一次的时候，如果参数带有副作用，那么你在使用这个宏的时候就可能出现
+//不可预知的后果。副作用就是表达式求值的时候出现的永久性效果。
+
+//例如：
+//x+1  不带副作用
+//x++  带有副作用
+
+
+//MAX宏可以证明具有副作用的参数引起的问题
+
+//如果是函数，不会出现像宏的副作用的问题
+
+//#include <stdio.h>
+//
+//#define MAX(x,y) (x>y)?(x):(y)
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 11;
+//
+//	int max = MAX(a++, b++);
+//	//等于int max = MAX(a++,b++) (a++>b++)?(a++):(b++)
+//
+//	printf("MAX = %d\n", max);
+//	printf("a = %d\n", a);
+//	printf("b = %d\n", b);
+//
+//	return 0;
+//}
+
+
+
+
+
+
+//宏和函数之间的关系
+
+//#include <stdio.h>
+// 
+////函数
+//int Max(int x, int y)
+//{
+//	return (x > y ? x : y);
+//}
+// 
+////宏
+//#define MAX(x,y) (x>y?x:y)
+//
+//int main()
+//{
+//	float a = 3.0f;
+//	float b = 4.0f;
+//
+//	int max1 = 0; 
+//	int max2 = 0;
+//
+//	max1 = MAX(a, b);
+//	max2 = Max(a, b);
+//
+//	printf("max1 = %d\nmax2 = %d\n", max1, max2);
+//	//在这个代码下宏比函数要好，如果我传浮点数进去，但是函数的返回类型是int,会造成问题
+//	//但是在宏定义下面仅仅只是替换，不会在乎传进去的值是什么类型，可以接收不同的数据,但是不够严谨
+//
+//
+//	return 0;
+//}
+
+
+//为什么不用函数来完成这个任务？原因有二：
+//1.用于调用函数和从函数返回的代码可能比实际执行这个小型计算工作所需要的时间更多。
+//所以宏比函数在程序的规模和速度方面更胜一筹
+//2.更为重要的是函数的参数必须声明为特定的类型。所以函数只能在类型合适的表达式上使用。
+//反之这个宏可以适用于整型，长整型，浮点型等。宏是无关类型的
+
+//缺点：
+//1.每次使用宏的时候，一份宏定义的代码将插入到程序中。除非宏比较短，否则可能大幅度增加程序的长度。
+//因为每调用一次宏，都会对代码进行替换，假如这个宏有100行，调用3次，就是300行，
+//但是函数只调用同一份代码
+
+//2.宏是没法调试的，因为调试的是.exe可执行文件，宏在预编译阶段就已经替换了
+
+//3.宏不能递归
+
+//4.宏由于类型无关，也就不够严谨
+
+//5.宏可能会带来运算符优先级的问题，导致过程容易出错
+
+
+
+
+
+//宏有时候可以做到函数做不到的事情。比如：宏的参数可以出现类型，但是函数做不到
+//举例：
+
+//#include <stdio.h>
+//
+//#define SIZE(type) sizeof(type)
+//
+//int main()
+//{
+//	int ret = SIZE(int);  //此时已经被替换成ret = sizeof(int)
+//
+//	printf("%d\n", ret);
+//
+//	return 0;
+//}
+
+
+
+//或者
+
+//#include <stdio.h>
+//
+//#define MALLOC(num,type) (type*)malloc(num*sizeof(type))
+//
+//int main()
+//{
+//	//int* pf = (int*)malloc(10 * sizeof(int));
+//	//这是传统的开辟内存方式
+//
+//	int* pf = MALLOC(10, int);
+//	//这样写就方便很多，函数是不能这样实现的，因为函数不能传类型
+//
+//	return 0;
+//}
+
+
+
+//宏名一般全部大写，函数一般不全部大写
+
+
+
+
+//#undef - 移除宏
+
+//如果现存的一个名字需要被重新定义，那么它的旧名字首先要被移除
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//	int a = MAX;
+//#undef MAX
+//
+//	int b = MAX;
+//
+//	return 0;
+//}
+
+
+
 
 
