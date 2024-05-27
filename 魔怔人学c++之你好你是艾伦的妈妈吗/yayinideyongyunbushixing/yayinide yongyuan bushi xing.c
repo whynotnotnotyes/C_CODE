@@ -15997,6 +15997,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //位段
 //位段的声明和结构体是类似的，有两个不同:
 //1.位段的成员必须是int , unsigned int 或 signed int (其实char也可以)
+//当成员都是int的时候，会一次开辟4个字节，当成员都是char的时候，一次开辟一个字节
 //2.位段的成员名后边有一个冒号和一个数字
 
 
@@ -16344,7 +16345,8 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 //
 //union un
 //{
-//	char arr[5]; //数组的元素类型是什么，就拿这个类型大小来算对齐数,arr类型是char,大小是1，跟默认对齐数8比，较小，1就是对齐数
+//	//char arr[5]; //数组的元素类型是什么，就拿这个类型大小来算对齐数,arr类型是char,大小是1，
+//  //跟默认对齐数8比，较小，1就是对齐数
 //	//写了arr[5],相当于写了5个char:char c1,char c2,char c3,char c4,char c5
 //	int i;  //默认对齐数8，i大小是4,4较小，4就是默认对齐数
 //
@@ -16369,6 +16371,63 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
+
+//结构体进阶 章节作业
+
+
+
+//1.当A=2，B=3时，pointer分配多少个字节的空间？
+
+//#include <stdio.h>
+//
+//#define MAX_SIZE A+B
+//
+//struct _Record_Struct
+//{
+//	unsigned char Env_Alarm_ID : 4;
+//	unsigned char Paral : 2;
+//	unsigned char state : ;
+//	unsigned char avail : 1;
+//}*Env_Alarm_Record;
+//
+//int main()
+//{
+//	struct _Record_Struct* pointer = (struct _Record_Secord_Struct*)malloc
+//	(sizeof(struct _Record_Struct) * MAX_SIZE);
+//
+//	return 0;
+//}
+
+
+
+
+//答案是9
+//解析：unsigned char state : ;  没有定义大小，那就占一整个开辟的空间，也就是占1个字节
+
+
+
+
+
+
+
+//2.结果是多少？
+
+//#include <stdio.h>
+//
+//union Un
+//{
+//	short s[7];
+//	int n;
+//};
+//
+//int main()
+//{
+//	printf("%d\n", sizeof(union Un));
+//
+//	return 0;
+//}
 
 
 
@@ -18706,6 +18765,7 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
 //#undef - 移除宏
 
 //如果现存的一个名字需要被重新定义，那么它的旧名字首先要被移除
@@ -18724,5 +18784,169 @@ double的scanf用 %lf ，printf用 %f ， %e（科学计数法）	*/
 
 
 
+
+
+
+
+//条件编译
+
+//在编译一个程序的时候我们如果要将一条语句(一组语句)编译或者放弃是很方便的。
+//因为我们有条件编译指令
+
+//比如说：调试性的代码，删除可惜，保留又碍事，所以我们可以选择性的编译
+
+//条件编译也是在预编译阶段进行处理
+
+
+//#include <stdio.h>
+//
+////#define TEST
+//
+//int main()
+//{
+//	int arr[10] = { 0 };
+//	int i = 0;
+//
+//	for (i = 0; i < 10; i++)
+//	{
+//		arr[i] = 0;
+//
+//#ifdef TEST  //意思是如果#define了TEST,那就执行，没定义就不执行
+//		printf("%d ", arr[i]);
+//#endif
+//	}
+//	//#ifdef 和 #endif是一对，需要呼应起来
+//	return 0;
+//}
+
+
+
+
+
+//多个分支的条件编译
+
+//#if 常量表达式
+//#elif 常量表达式
+//#else 
+//#endif
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//#if 1==2
+//	printf("haha\n");
+//#elif 2=2
+//	printf("hehe\n");
+//#else
+//	printf("嘿嘿\n");
+//#endif
+//	
+//	return 0;
+//}
+
+
+
+
+//if !defined 和 ifndef 
+
+//#include <stdio.h>
+//
+//int main()
+//{
+//#if defined(TEST)
+//	printf("hehe\n");
+//#endif
+//
+//
+//#if !defined(TEST)  //如果没有定义TEST的话就执行
+//	printf("haha\n");
+//#endif
+//
+//
+//
+//
+//#ifdef(TEST)
+//	printf("hehe\n");
+//#endif
+//
+//
+//#ifndef(TEST)      //如果没有定义TEST的话就执行
+//	printf("haha\n");
+//#endif
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+//文件包含
+
+//我们已经知道，#include指令可以使另外一个文件被编译。就像它实际出现于#include指令一样。
+//这种替换的方式很简单：预处理器先删除这条指令，并用包含文件的内容替换。
+//这样一个源文件被包含10次，那就实际被编译10次
+
+
+//#include <stdio.h>
+//#include "add.h"
+
+//本地文件""的查找策略：先在源文件所在目录下查找，如果该头文件未找到，编译器就像查找库函数头文件一样在标准位置查找头文件。
+//如果都找不到就提示编译错误
+
+//尖括号<>(库函数)的查找策略：查找头文件直接区标准路径下去查找，如果找不到就提示编译错误
+
+//""的范围更大，会在本地目录查找也会在标准路径下去查找
+//库函数也可以用""的形式包含，但是这样做效率就比较低,比较慢
+
+
+
+//如何防止头文件被重复多次的包含？
+
+//第一种方法
+//#ifndef __TEST_H__    如果test.h没有被定义
+//#define __TEST_H__    那就定义一个test.h的头文件
+
+//int Add(int x,int y);
+
+//#endif
+
+
+
+//第二种方法
+//在头文件里加上 #pragma once
+//这是比较现代的写法
+
+
+
+
+//用宏的方式实现offsetof
+
+//#include <stdio.h>
+//
+//#define OFFSETOF(struct_name,member_name) (int)&(((struct_name*)0)->member_name)
+////原本是要把结构体指针指向的那个成员的偏移量减去起始位置的偏移量，但是起始位置是0，减去0还是原来的值，
+////所以没必要减去了
+//
+//struct S
+//{
+//	int c1;
+//	char a;
+//	double c2;
+//};
+//
+//int main()
+//{
+//	struct S s;
+//
+//	printf("%d\n", OFFSETOF(struct S, c1));
+//	printf("%d\n", OFFSETOF(struct S, a));
+//	printf("%d\n", OFFSETOF(struct S, c2));
+//
+//	return 0;
+//}
 
 
